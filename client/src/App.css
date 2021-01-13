@@ -23,11 +23,12 @@
   grid-area: middle;
   grid-column-start: span 3;
   /*background: bisque;*/
+  height: 83vh;
 }
 
 .footer {
   grid-area: footer;
-  height: 3rem;
+  height: 5vh;
 }
 
 .container {

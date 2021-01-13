@@ -48,7 +48,7 @@ const Register = ({setAuth}) => {
 
   }
 
-  return <Fragment>
+  return <div className='middle'>
     <h1 className="text-center py-5">Register</h1>
     <form onSubmit={onSubmitForm} className='col-4'>
       <input className="form-control my-3" type="name" name="name" placeholder="name" value={name} onChange={onChange}/>
@@ -58,7 +58,7 @@ const Register = ({setAuth}) => {
       <Link className={'btn btn-warning my-1 '+ buttonStyle.button} to='/login'>Login</Link>
     </form>
 
-  </Fragment>;
+  </div>;
 };
 
 export default Register;

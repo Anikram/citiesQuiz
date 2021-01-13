@@ -20,7 +20,7 @@ const Login = ({setAuth, loginUser}) => {
     const body = {email, password}
     loginUser(JSON.stringify(body))
   }
-  return <Fragment>
+  return <div className='middle'>
     <h1 className="text-center py-5">Login</h1>
     <form onSubmit={onSubmitForm} className='col-4'>
       <input onChange={onChange} value={email} type="email" name="email" placeholder="email"
@@ -31,7 +31,7 @@ const Login = ({setAuth, loginUser}) => {
       <Link className={'btn btn-warning my-1 '+ buttonStyle.button} to='/register'>Register</Link>
     </form>
 
-  </Fragment>;
+  </div>;
 };
 
 export default Login;
