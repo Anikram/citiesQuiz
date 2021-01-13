@@ -21,7 +21,7 @@ const Header = ({isAuthenticated, setAuth, profile,deleteToken}) => {
       <div>
         {isAuthenticated
           ? <Fragment>
-            <PlayerPanel name={`${profile.user_name}`}/>
+            <Link to='/profile'><PlayerPanel name={`${profile.user_name}`}/></Link>
             <LogoutButton logoutUser={logoutUser}/>
           </Fragment>
           : <div className='my-4'>

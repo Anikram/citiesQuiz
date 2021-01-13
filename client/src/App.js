@@ -59,9 +59,8 @@ class App extends React.Component {
         <div className='container col'>
           <ToastContainer/>
           <Switch>
-            <Route exact path="/" render={props => !this.props.isAuthenticated
-              ? <Players {...props} setAuth={setIsAuthenticated}/>
-              : <Redirect to="/profile"/>
+            <Route exact path="/" render={
+              props =>  <Players {...props} fetchProfile={this.props.fetchProfile} profile={this.props.profile} setAuth={setIsAuthenticated}/>
             }
             />
             <Route exact path="/login" render={props => !this.props.isAuthenticated

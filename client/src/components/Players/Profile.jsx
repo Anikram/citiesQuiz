@@ -1,9 +1,8 @@
-import React, {Fragment, useState, useEffect} from "react";
+import React, {Fragment, useEffect} from "react";
 import {toast} from "react-toastify";
 import {Redirect} from "react-router-dom";
 
 const Profile = ({setAuth, isAuthenticated, fetchProfile, profile,deleteToken}) => {
-  const [name, setName] = useState('');
 
   useEffect(() => {
     getName()

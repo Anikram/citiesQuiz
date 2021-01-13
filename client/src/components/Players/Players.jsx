@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import s from './Players.module.css';
 import Avatar from "../common/Avatar/Avatar";
 import Button from "../common/Button/Button";
+import {toast} from "react-toastify";
 
 const Player = ({name = 'placeholder', number = 1, score = '1234', avatarUrl}) => {
   return (
@@ -16,7 +17,20 @@ const Player = ({name = 'placeholder', number = 1, score = '1234', avatarUrl}) =
   )
 }
 
-const Players = () => {
+const Players = ({profile, fetchProfile, setAuth, users}) => {
+
+  useEffect(() => {
+    getName()
+    console.log(profile)
+  },[])
+
+  async function getName() {
+    try {
+      fetchProfile(localStorage.getItem("token"))
+    } catch (err) {
+      console.error(err.message)
+    }
+  }
   return (
     <div className={s.playersContainer + ' middle'}>
       <div className={s.playersPanel}>
