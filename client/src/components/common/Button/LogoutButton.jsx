@@ -2,7 +2,7 @@ import React, {Fragment} from "react";
 import buttonStyle from "./Button.module.css";
 import {toast} from "react-toastify";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faCoffee, faDoorClosed} from '@fortawesome/free-solid-svg-icons'
+import {faCoffee, faDoorOpen} from '@fortawesome/free-solid-svg-icons'
 
 const LogoutButton = ({logoutUser}) => {
   const onLogoutButtonClick = (e) => {
@@ -12,7 +12,7 @@ const LogoutButton = ({logoutUser}) => {
   }
 
   return (
-    <button onClick={onLogoutButtonClick} className={"btn btn-warning " + buttonStyle.button}>L</button>
+    <button onClick={onLogoutButtonClick} className={"btn btn-warning " + buttonStyle.button}><FontAwesomeIcon icon={faDoorOpen}/></button>
   )
 }
 

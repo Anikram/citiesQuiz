@@ -4,7 +4,7 @@ import Avatar from "../../Avatar/Avatar";
 
 const PlayerPanel = ({name, avatarUrl}) => {
   return (
-    <div className={s.playerPanel + ' my-4'}>
+    <div className={s.playerPanel + ' my-2'}>
       <div className={s.playerAvatar}>
         <Avatar userAvatar={avatarUrl}/>
       </div>

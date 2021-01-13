@@ -15,5 +15,24 @@ router.get('/',
       res.status(500).send('Server error');
     }
   })
+router.get('/games',
+  authorization,
+  async (req,res) => {
+    try {
+      //req.user is a payload (../middleware/authorization.js)
+      const games = await pool.query("SELECT * FROM games WHERE user_id = $1",[req.user])
+      const region = await pool.query("SELECT cities FROM regions WHERE region_id = $1",[4])
+
+      const gamesWithCities = games.rows.map(el => {
+        return {...el, ...region.rows[0]}
+      })
+
+      res.json(gamesWithCities)
+    } catch (err) {
+      console.error(err.message)
+      res.status(500).send('Server error');
+    }
+  })
+
 
 module.exports = router;
