@@ -1,0 +1,24 @@
+.header {
+  height: 6rem;
+  background-color: #282c34;
+}
+
+.header h1 {
+  font-size: 3rem;
+  padding: 1rem 0;
+  color: black;
+  text-decoration: underline aliceblue;
+}
+
+.header span {
+  color: aliceblue;
+  text-decoration: underline;
+}
+
+.header a:hover {
+  text-decoration: none;
+}
+
+.footer {
+  background-color: #282c34;
+}

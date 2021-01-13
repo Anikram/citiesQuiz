@@ -1,0 +1,38 @@
+.button {
+    /*display: inline-block;*/
+    /*min-width: 4rem;*/
+    /*max-width: 20rem;*/
+    /*!*width: 30%;*!*/
+    /*min-height: 2.5rem;*/
+    /*width: auto;*/
+    /*height: auto;*/
+    /*margin: 1rem 0.5rem;*/
+    color: white;
+    background-color: #282c34;
+    border-radius: 1rem;
+    border: 3px Solid white;
+    /*padding: 0.5rem 1rem ;*/
+    font-size: 1.2rem;
+    transition: 0.3s;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.button:active {
+    background-color: aliceblue;
+    border: 2px Solid #282c34;
+    color: #282c34;
+    transition: 0.3s;
+}
+
+.left {
+    float: left;
+}
+
+.right{
+    float: right;
+}
+
+.button p {
+    margin-bottom: 0;
+}

@@ -1,0 +1,18 @@
+.avatarContainer {
+    display: inline-block;
+    width: 80%;
+    height: auto;
+    margin: 0.5rem;
+}
+
+.avatarContainer img {
+    display: block;
+}
+
+.avatarImage {
+    border: 3px Solid #282c34;
+    background: bisque;
+    border-radius: 50%;
+    width: 80%;
+    margin: 0 auto;
+}

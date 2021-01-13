@@ -1,0 +1,79 @@
+.playersContainer {
+    padding: 3rem;
+    background-color: aliceblue;
+}
+
+.playersPanel {
+    width: 50%;
+    margin: auto;
+    min-height: 10rem;
+    height: auto;
+    background-color: white;
+    border-radius: 2rem;
+    /*padding: 1rem 3rem;*/
+    border: 2px solid #282c34;
+}
+
+.playersText {
+    color: #282c34;
+    width: 90%;
+    margin: 1rem auto;
+    text-align: center;
+    letter-spacing: 0.3rem;
+}
+
+.playersText h1 {
+    text-decoration: underline;
+    margin-bottom: 2rem;
+}
+
+.playersList {
+    width: 90%;
+    margin: auto;
+}
+
+.playerContainer {
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    vertical-align: middle;
+
+}
+
+.playerAvaContainer {
+    display: inline-block;
+    width: 4rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+}
+
+.table {
+    width: 100%;
+    line-height: 1rem;
+}
+
+.actionDiv {
+    margin-bottom: 9rem;
+    margin-right: 3rem;
+}
+
+.number {
+    margin-right: 1rem;
+    margin-left: 0.5rem;
+    color: crimson;
+}
+
+.name {
+    font-weight: 600;
+}
+
+.score {
+    font-weight: 600;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    font-style: italic;
+}

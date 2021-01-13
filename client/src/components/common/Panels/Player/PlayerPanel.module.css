@@ -1,0 +1,24 @@
+.playerPanel {
+    display: inline-block;
+    flex-direction: row;
+    align-items: center;
+    width: 70%;
+    /*height: 6rem;*/
+
+}
+
+.playerAvatar {
+    display: inline-flex;
+    width: 30%;
+    vertical-align: middle;
+
+}
+
+.playerName {
+    display: inline-block;
+    font-size: 1.5rem;
+    vertical-align: middle;
+    height: auto;
+    width: 70%;
+    color: aliceblue;
+}

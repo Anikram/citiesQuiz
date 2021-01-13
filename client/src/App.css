@@ -1,0 +1,36 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.App {
+  display: grid;
+  grid-template-areas:
+          'header header header'
+          'middle middle middle'
+          'footer footer footer';
+  background-color: aliceblue;
+}
+
+.header {
+  grid-area: header;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.middle {
+  grid-area: middle;
+  grid-column-start: span 3;
+  /*background: bisque;*/
+}
+
+.footer {
+  grid-area: footer;
+  height: 3rem;
+}
+
+.container {
+  background-color: aliceblue;
+}
+
