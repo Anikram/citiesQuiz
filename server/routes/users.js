@@ -3,10 +3,10 @@ const pool = require('../db');
 const authorization = require('../middleware/authorization');
 
 router.get('/',
-  authorization,
+
   async (req,res) => {
     try {
-      const users = await pool.query("SELECT * FROM users")
+      const users = await pool.query("SELECT user_name,top_score FROM users ORDER BY  top_score DESC LIMIT 5 ")
       res.json(users.rows)
     } catch (err) {
       console.error(err.message)

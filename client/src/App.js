@@ -25,25 +25,18 @@ import {
 } from "./redux/profileReducer";
 import {initializeApp} from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
+import {fetchTopUsers} from "./redux/usersReducer";
 
 require('dotenv').config()
 
 class App extends React.Component {
   componentDidMount() {
-
-    // console.log(localStorage.getItem("token"))
-    console.log(`LS token before: ${localStorage.getItem("token")}`)
-
     this.props.initializeApp(localStorage.getItem("token"));
-
-    // localStorage.setItem("token", this.props.token)
-
-    console.log(`LS token after: ${localStorage.getItem("token")}`)
-
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps !== this.props) {
+      checkUserAuthenticated()
       localStorage.setItem("token", this.props.token)
     }
   }
@@ -60,7 +53,7 @@ class App extends React.Component {
           <ToastContainer/>
           <Switch>
             <Route exact path="/" render={
-              props =>  <Players {...props} fetchProfile={this.props.fetchProfile} profile={this.props.profile} setAuth={setIsAuthenticated}/>
+              props =>  <Players {...props} users={this.props.users} fetchTopUsers={this.props.fetchTopUsers} fetchProfile={this.props.fetchProfile} profile={this.props.profile} setAuth={setIsAuthenticated}/>
             }
             />
             <Route exact path="/login" render={props => !this.props.isAuthenticated
@@ -90,7 +83,8 @@ const mapStateToProps = (state) => {
     isAuthenticated: state.profile.isAuthenticated,
     token: state.profile.token,
     initialized: state.app.initialized,
-    profile: state.profile.profile
+    profile: state.profile.profile,
+    users: state.users.users
   }
 }
 
@@ -103,7 +97,8 @@ const AppContainer = compose(
     setToken,
     initializeApp,
     fetchProfile,
-    deleteToken
+    deleteToken,
+    fetchTopUsers
   }))(App);
 
 

@@ -3,10 +3,12 @@ import thunkMiddleware from 'redux-thunk';
 import profileReducer from "./profileReducer";
 import {composeWithDevTools} from "redux-devtools-extension";
 import appReducer from "./appReducer";
+import usersReducer from "./usersReducer";
 
 let reducers = combineReducers({
   profile: profileReducer,
-  app: appReducer
+  app: appReducer,
+  users: usersReducer
 });
 
 const store = createStore(reducers, composeWithDevTools(

@@ -39,7 +39,6 @@ const authAPI = {
 
     return response
   }
-
 }
 
 export default authAPI;

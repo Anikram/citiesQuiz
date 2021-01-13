@@ -4,24 +4,24 @@ import Avatar from "../common/Avatar/Avatar";
 import Button from "../common/Button/Button";
 import {toast} from "react-toastify";
 
-const Player = ({name = 'placeholder', number = 1, score = '1234', avatarUrl}) => {
+const Player = ({name = 'placeholder', score = '1234', avatarUrl}) => {
   return (
     <tr className={s.tr}>
       <td>
         <div className={s.playerAvaContainer}><Avatar/></div>
       </td>
-      <td><span className={s.number}>{`${number}.`}</span></td>
       <td><span className={s.name}>{name}</span></td>
       <td><span className={s.score}>{score + ' km'}</span></td>
     </tr>
   )
 }
 
-const Players = ({profile, fetchProfile, setAuth, users}) => {
+const Players = ({profile,fetchTopUsers, fetchProfile, users}) => {
 
   useEffect(() => {
     getName()
     console.log(profile)
+    fetchTopUsers()
   },[])
 
   async function getName() {
@@ -39,11 +39,11 @@ const Players = ({profile, fetchProfile, setAuth, users}) => {
           <div className={s.playersList}>
             <table className={s.table}>
               <tbody>
-              <Player name='Tolik'/>
-              <Player name='Lelik'/>
-              <Player name='Bolik'/>
-              <Player name='Golik'/>
-              <Player name='Zolik'/>
+              {
+                users.map(u => {
+                  return <Player name={u.user_name} score={u.top_score}/>
+                })
+              }
               </tbody>
             </table>
           </div>
