@@ -48,12 +48,15 @@ class App extends React.Component {
 
     return (
       <Fragment>
-        <Header isAuthenticated={this.props.isAuthenticated} profile={this.props.profile} setAuth={setIsAuthenticated} deleteToken={this.props.deleteToken}/>
+        <Header isAuthenticated={this.props.isAuthenticated} profile={this.props.profile} setAuth={setIsAuthenticated}
+                deleteToken={this.props.deleteToken}/>
         <div className='container col'>
           <ToastContainer/>
           <Switch>
             <Route exact path="/" render={
-              props =>  <Players {...props} users={this.props.users} fetchTopUsers={this.props.fetchTopUsers} fetchProfile={this.props.fetchProfile} profile={this.props.profile} setAuth={setIsAuthenticated}/>
+              props => <Players {...props} isAuth={this.props.isAuthenticated} users={this.props.users}
+                                fetchTopUsers={this.props.fetchTopUsers} fetchProfile={this.props.fetchProfile}
+                                profile={this.props.profile} setAuth={setIsAuthenticated}/>
             }
             />
             <Route exact path="/login" render={props => !this.props.isAuthenticated
@@ -67,7 +70,8 @@ class App extends React.Component {
             }
             />
             <Route exact path="/profile" render={props => this.props.isAuthenticated
-              ? <Profile {...props} deleteToken={this.props.deleteToken} setAuth={setIsAuthenticated} fetchProfile={this.props.fetchProfile} profile={this.props.profile}/>
+              ? <Profile {...props} deleteToken={this.props.deleteToken} setAuth={setIsAuthenticated}
+                         fetchProfile={this.props.fetchProfile} profile={this.props.profile}/>
               : <Redirect to="/login"/>
             }
             />

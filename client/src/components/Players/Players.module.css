@@ -77,3 +77,11 @@
     margin-left: 1rem;
     font-style: italic;
 }
+
+.scoreSpan {
+    font-weight: 600;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    font-style: italic;
+    color: crimson;
+}

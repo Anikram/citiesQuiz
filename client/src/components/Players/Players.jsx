@@ -16,7 +16,7 @@ const Player = ({name = 'placeholder', score = '1234', avatarUrl}) => {
   )
 }
 
-const Players = ({profile,fetchTopUsers, fetchProfile, users}) => {
+const Players = ({profile,fetchTopUsers, fetchProfile, users, isAuth}) => {
 
   useEffect(() => {
     getName()
@@ -51,7 +51,7 @@ const Players = ({profile,fetchTopUsers, fetchProfile, users}) => {
       </div>
 
       <div className={s.actionDiv}>
-        <Button side='right' text='New game'/>
+        {!isAuth || <Button side='right' text='New game'/>}
       </div>
     </div>
   )
