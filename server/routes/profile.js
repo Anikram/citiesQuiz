@@ -21,7 +21,7 @@ router.get('/games',
     try {
       //req.user is a payload (../middleware/authorization.js)
       const games = await pool.query("SELECT * FROM games WHERE user_id = $1",[req.user])
-      const region = await pool.query("SELECT cities FROM regions WHERE region_id = $1",[4])
+      const region = await pool.query("SELECT cities FROM regions WHERE region_id = $1",[1])
 
       const gamesWithCities = games.rows.map(el => {
         return {...el, ...region.rows[0]}

@@ -33,13 +33,13 @@ CREATE TABLE regions (
 
 INSERT INTO users (user_name, user_email, user_password) VALUES ('Sam','example@gmail.com','password');
 INSERT INTO games (user_id, region_id, game_finished) VALUES ('d5904e47-569e-44ae-988f-a2b906f55c07',1,false);
-INSERT INTO regions (region_name, cities) VALUES ('europe','[{"title":"Geneva","lat":46.204391,"long":6.143158},{"title":"Madrid","lat":40.416775,"long":-3.703790}]');
+
 
 --alter
 ALTER TABLE regions DROP COLUMN region_id;
 ALTER TABLE games DROP COLUMN user_id;
 ALTER TABLE regions ADD COLUMN region_id BIGSERIAL PRIMARY KEY;
-ALTER TABLE users ADD COLUMN game_id INTEGER references games(game_id);
+ALTER TABLE users ADD COLUMN top_score INTEGER;
 
 ALTER TABLE regions ADD COLUMN game_id INTEGER;
 ALTER TABLE regions
