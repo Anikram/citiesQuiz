@@ -35,7 +35,6 @@ const authAPI = {
       method: "GET",
       headers: {token: token}
     })
-    console.log(response)
 
     return response
   }

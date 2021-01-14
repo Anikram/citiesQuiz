@@ -1,11 +1,9 @@
 import s from './Button.module.css';
 import React from 'react';
 
-const Button = ({text, side}) => {
+const Button = ({text = 'default', side, cb, value}) => {
   return (
-    <button className={'btn btn-dark ' + s.button + ' ' + (side === 'left' ? s.left : s.right)}>
-      <p>{text}</p>
-    </button>
+    <button onClick={() => cb(value)} className={'btn btn-dark ' + s.button + ' ' + (side === 'left' ? s.left : s.right)}>{text}</button>
   )
 }
 

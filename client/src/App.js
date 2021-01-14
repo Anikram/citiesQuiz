@@ -26,6 +26,7 @@ import {
 import {initializeApp} from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import {fetchTopUsers} from "./redux/usersReducer";
+import {createNewGame, fetchGameData} from "./redux/gameReducer";
 
 require('dotenv').config()
 
@@ -75,6 +76,12 @@ class App extends React.Component {
               : <Redirect to="/login"/>
             }
             />
+            <Route exact path='/game' render={props => this.props.isAuthenticated
+              ? <Game fetchGameData={this.props.fetchGameData} profile={this.props.profile}
+                      createNewGame={this.props.createNewGame} gameData={this.props.gameData}/>
+              : <Redirect to="/login"/>
+
+            }/>
           </Switch>
         </div>
         <Footer/>
@@ -89,7 +96,8 @@ const mapStateToProps = (state) => {
     token: state.profile.token,
     initialized: state.app.initialized,
     profile: state.profile.profile,
-    users: state.users.users
+    users: state.users.users,
+    gameData: state.games
   }
 }
 
@@ -103,7 +111,9 @@ const AppContainer = compose(
     initializeApp,
     fetchProfile,
     deleteToken,
-    fetchTopUsers
+    fetchTopUsers,
+    fetchGameData,
+    createNewGame
   }))(App);
 
 

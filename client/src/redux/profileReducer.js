@@ -61,7 +61,7 @@ export const setIsAuthenticated = (bool) => async (dispatch, getState) => {
 
 
 export const loginUser = (data) => async (dispatch) => {
-  const response = await authAPI.loginUser(data)
+  const response = await authAPI.loginUser(JSON.stringify(data))
 
   const parseRes = await response.json()
 

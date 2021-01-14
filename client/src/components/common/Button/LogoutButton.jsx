@@ -12,7 +12,8 @@ const LogoutButton = ({logoutUser}) => {
   }
 
   return (
-    <button onClick={onLogoutButtonClick} className={"btn btn-warning " + buttonStyle.button}><FontAwesomeIcon icon={faDoorOpen}/></button>
+    <button onClick={onLogoutButtonClick} className={"btn btn-warning " + buttonStyle.button}><FontAwesomeIcon
+      icon={faDoorOpen}/></button>
   )
 }
 

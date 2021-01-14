@@ -18,7 +18,7 @@ const Login = ({setAuth, loginUser}) => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     const body = {email, password}
-    loginUser(JSON.stringify(body))
+    loginUser(body)
   }
   return <div className='middle'>
     <h1 className="text-center py-5">Login</h1>

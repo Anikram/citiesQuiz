@@ -4,11 +4,13 @@ import profileReducer from "./profileReducer";
 import {composeWithDevTools} from "redux-devtools-extension";
 import appReducer from "./appReducer";
 import usersReducer from "./usersReducer";
+import gameReducer from "./gameReducer";
 
 let reducers = combineReducers({
   profile: profileReducer,
   app: appReducer,
-  users: usersReducer
+  users: usersReducer,
+  games: gameReducer
 });
 
 const store = createStore(reducers, composeWithDevTools(

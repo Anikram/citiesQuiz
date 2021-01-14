@@ -1,0 +1,33 @@
+.cityTitleDiv {
+    position: fixed;
+    top: 15vh;
+    left: 10vw;
+    /*transform: translate(-15vh,-10vw);*/
+    font-size: 2rem;
+    width: auto;
+    padding: 0.5rem 1rem;
+    background-color: #282c34;
+    color: aliceblue;
+    border-radius: 1rem;
+
+}
+
+.scoreDiv {
+    position: fixed;
+    top: 15vh;
+    right: 10vw;
+    /*transform: translate(-15vh,-10vw);*/
+    font-size: 2rem;
+    width: auto;
+    padding: 0.5rem 1rem;
+    background-color: #282c34;
+    color: aliceblue;
+    border-radius: 1rem;
+
+}
+.visible {
+    display: none;
+}
+.invisible {
+    display: block;
+}
