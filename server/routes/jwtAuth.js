@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const pool = require('../db')
+const pool = require('../db/db')
 const bcrypt = require("bcrypt");
 const jwtGenerator = require("../utils/jwtGenerator");
 const { body, validationResult } = require('express-validator');

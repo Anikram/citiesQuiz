@@ -54,12 +54,12 @@ const Game = ({fetchGameData, profile,createNewGame, gameData, finishGame, delet
   const retryCallBack = () => {
     setStartPopPanel(true)
     setGameOverPanel(false)
-    finishGame(gameData.game_id)
+    finishGame(gameData.game_id, finalScore)
   }
 
   const quitCallBack = () => {
     setGameRunning(false)
-    finishGame(gameData.game_id)
+    finishGame(gameData.game_id, finalScore)
   }
 
   return (

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const pool = require('../db');
+const pool = require('../db/db');
 const authorization = require('../middleware/authorization');
 
 router.get('/',
@@ -52,8 +52,8 @@ router.post('/game',authorization, async (req,res) => {
 
 router.put('/game', authorization, async (req, res) => {
   try {
-    const {game_id} = req.body;
-    const response = await pool.query("UPDATE games SET game_finished=$1 WHERE game_id=$2 RETURNING *",[true,game_id])
+    const {game_id, score} = req.body;
+    const response = await pool.query("UPDATE games SET game_finished=$1, score=$2 WHERE game_id=$3 RETURNING *",[true,score,game_id])
     res.json(response.rows[0])
   } catch (err) {
     console.error(err.message)

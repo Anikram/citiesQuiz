@@ -16,8 +16,8 @@ const gameAPI = {
     })
   },
 
-  finishGame(game_id, token) {
-    const data = {game_id, token};
+  finishGame(game_id, token, score) {
+    const data = {game_id, token, score};
     const body = JSON.stringify(data)
     return fetch('http://localhost:5000/profile/game', {
       method: "PUT",

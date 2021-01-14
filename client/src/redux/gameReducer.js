@@ -18,6 +18,7 @@ const gameReducer = (state = initialState, action) => {
         ...state,
         game_id: +action.gameData.game_id,
         game_finished: action.gameData.game_finished,
+        score: action.gameData.store,
         cities: [...action.gameData.cities]
       }
     case FINISH_CURRENT_GAME:
@@ -30,6 +31,7 @@ const gameReducer = (state = initialState, action) => {
         ...state,
         game_id: null,
         game_finished: false,
+        score: 0,
         cities: []
       }
     default:
@@ -56,9 +58,9 @@ export const createNewGame = (user_id, region_name) => async (dispatch, getState
   dispatch(loadGameData(parseRes))
 }
 
-export const finishGame = (game_id) => async (dispatch,getState) => {
+export const finishGame = (game_id,score) => async (dispatch,getState) => {
   const token = getState().profile.token;
-  await gameAPI.finishGame(game_id,token);
+  await gameAPI.finishGame(game_id,token,score);
   dispatch(finishCurrentGame())
 }
 
