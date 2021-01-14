@@ -45,14 +45,12 @@ export const toggleAuthenticated = (bool) => ({type: TOGGLE_IS_AUTH, bool})
 export const setUserToken = (token) => ({type: SET_TOKEN, token});
 export const deleteUserToken = () => ({type: DELETE_TOKEN});
 
-export const checkUserAuthenticated = () => async (dispatch, getState) => {
-  const response = await authAPI.isAuth(getState().profile.token)
-  if (response.status !== 200) {
-    const parseRes = await response.json();
-    console.error(parseRes)
-    dispatch(toggleAuthenticated(false));
-  } else {
+export const checkUserAuthenticated = (token) => async (dispatch, getState) => {
+  const response = await authAPI.isAuth(token)
+  if (response) {
     dispatch(toggleAuthenticated(true));
+  } else {
+    dispatch(toggleAuthenticated(false));
   }
 }
 
@@ -64,6 +62,7 @@ export const setIsAuthenticated = (bool) => async (dispatch, getState) => {
 export const loginUser = (email, password) => async (dispatch) => {
   const response = await authAPI.loginUser(email, password)
   const parseRes = await response.json()
+  console.log('incoming token: '+ parseRes.token)
 
   if (parseRes.token) {
     dispatch(toggleAuthenticated(true))

@@ -5,7 +5,7 @@ import PopUpPanel from "../common/Panels/PopUpPannel/PopUpPanel";
 import {Redirect} from "react-router-dom";
 import buttonStyle from "../common/Button/Button.module.css";
 
-const Game = ({fetchGameData, profile,createNewGame, gameData}) => {
+const Game = ({fetchGameData, profile,createNewGame, gameData, finishGame, deleteGame}) => {
   const [gameRunning, setGameRunning] = useState(true);
   const [cities, setCities] = useState([]);
   const [startPopPanel, setStartPopPanel] = useState(true);
@@ -35,6 +35,7 @@ const Game = ({fetchGameData, profile,createNewGame, gameData}) => {
     console.log('quit game triggered')
     setFinishPopPanel(false)
     setGameRunning(false)
+    deleteGame(gameData.game_id)
   }
 
   const continueGame = () => {
@@ -45,7 +46,7 @@ const Game = ({fetchGameData, profile,createNewGame, gameData}) => {
     }
   }
 
-  const gameOver = (score) => {
+  const handleGameOver = (score) => {
     setFinalScore(score)
     setGameOverPanel(true)
   }
@@ -53,10 +54,12 @@ const Game = ({fetchGameData, profile,createNewGame, gameData}) => {
   const retryCallBack = () => {
     setStartPopPanel(true)
     setGameOverPanel(false)
+    finishGame(gameData.game_id)
   }
 
   const quitCallBack = () => {
     setGameRunning(false)
+    finishGame(gameData.game_id)
   }
 
   return (
@@ -65,7 +68,7 @@ const Game = ({fetchGameData, profile,createNewGame, gameData}) => {
       : <div>
 
         <div className={`middle ${s.gameContainer}`}>
-          <Map cities={cities} gameOverCallback={gameOver}/>
+          <Map cities={cities} gameOverCallback={handleGameOver}/>
           <button onClick={exitGame} className={"btn btn-warning " + buttonStyle.button +' '+ s.quitButtonDiv}>Quit</button>
         </div>
         {!startPopPanel ||

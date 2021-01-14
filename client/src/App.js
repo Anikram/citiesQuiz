@@ -25,7 +25,7 @@ import {
 import {initializeApp} from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import {fetchTopUsers} from "./redux/usersReducer";
-import {createNewGame, fetchGameData} from "./redux/gameReducer";
+import {createNewGame, deleteGame, fetchGameData, finishGame} from "./redux/gameReducer";
 
 require('dotenv').config()
 
@@ -36,7 +36,7 @@ class App extends React.Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps !== this.props) {
-      checkUserAuthenticated()
+      checkUserAuthenticated(localStorage.getItem("token"))
       localStorage.setItem("token", this.props.token)
     }
   }
@@ -77,7 +77,8 @@ class App extends React.Component {
             />
             <Route exact path='/game' render={props => this.props.isAuthenticated
               ? <Game fetchGameData={this.props.fetchGameData} profile={this.props.profile}
-                      createNewGame={this.props.createNewGame} gameData={this.props.gameData}/>
+                      createNewGame={this.props.createNewGame} gameData={this.props.gameData}
+              deleteGame={this.props.deleteGame} finishGame={this.props.finishGame}/>
               : <Redirect to="/login"/>
 
             }/>
@@ -113,7 +114,9 @@ const AppContainer = compose(
     fetchTopUsers,
     fetchGameData,
     createNewGame,
-    registerUser
+    registerUser,
+    finishGame,
+    deleteGame
   }))(App);
 
 

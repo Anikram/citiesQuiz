@@ -51,7 +51,7 @@ function Map({cities, gameOverCallback,quitButtonCb}) {
       const timer = setTimeout(() => {
         setCurrentCity({...city, visible: false});
         setGuessCities(guessCities + 1)
-      }, 2500)
+      }, 500)
     }
   }
   const QUIT_BUTTON_STYLING = {

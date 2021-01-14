@@ -50,6 +50,26 @@ router.post('/game',authorization, async (req,res) => {
   }
 })
 
+router.put('/game', authorization, async (req, res) => {
+  try {
+    const {game_id} = req.body;
+    const response = await pool.query("UPDATE games SET game_finished=$1 WHERE game_id=$2 RETURNING *",[true,game_id])
+    res.json(response.rows[0])
+  } catch (err) {
+    console.error(err.message)
+  }
+})
+
+router.delete('/game', authorization, async (req, res) => {
+  try {
+    const {game_id} = req.body;
+    const response = await pool.query("DELETE FROM games WHERE game_id=$1 RETURNING *",[game_id])
+    res.json(response.rows[0])
+  } catch (err) {
+    console.error(err.message)
+  }
+})
+
 
 
 

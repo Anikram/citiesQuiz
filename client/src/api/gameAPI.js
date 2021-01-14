@@ -14,6 +14,26 @@ const gameAPI = {
       headers: {"Content-Type": "application/json"},
       body: body
     })
+  },
+
+  finishGame(game_id, token) {
+    const data = {game_id, token};
+    const body = JSON.stringify(data)
+    return fetch('http://localhost:5000/profile/game', {
+      method: "PUT",
+      headers: {"Content-Type": "application/json"},
+      body: body
+    })
+  },
+
+  deleteGame(game_id, token) {
+    const data = {game_id, token};
+    const body = JSON.stringify(data)
+    return fetch('http://localhost:5000/profile/game', {
+      method: "DELETE",
+      headers: {"Content-Type": "application/json"},
+      body: body
+    })
   }
 }
 
