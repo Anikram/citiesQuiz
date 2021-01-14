@@ -5,7 +5,7 @@ import Input from "../../Input/Input";
 import {Dropdown, DropdownButton, FormControl, InputGroup} from "react-bootstrap";
 
 const PopUpPanel = ({wDropdown, dropdownText ,text, confirmText, declineText, onSuccess, onDecline}) => {
-  const [region, setRegion] = useState('');
+  const [region, setRegion] = useState('Europe');
 
   return (
     <div className={s.backInBlack}>
@@ -26,13 +26,8 @@ const PopUpPanel = ({wDropdown, dropdownText ,text, confirmText, declineText, on
         </InputGroup>
         }
 
-
-
         <div className={s.actionSection}>
-          {/*<button title={confirmText || 'Lorem.'} onClick={onSuccess}>Yes</button>*/}
-          {/*<button title={confirmText || 'Lorem.'} onClick={onDecline}>No</button>*/}
-
-          <Button addClass={'btn btn-success'} cb={onSuccess} value={region} text={confirmText || 'Lorem.'} side='left'/>
+          <Button addClass={'btn btn-success'} cb={(region) => onSuccess(region)} value={region} text={confirmText || 'Lorem.'} side='left'/>
           <Button addClass={'btn btn-warning'} cb={onDecline} text={declineText || 'Ipsum.'} side='right'/>
         </div>
       </div>

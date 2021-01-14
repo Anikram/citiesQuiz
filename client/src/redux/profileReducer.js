@@ -1,5 +1,6 @@
 import authAPI from "../api/authAPI";
 import {toast} from "react-toastify";
+import profileAPI from "../api/profileApi";
 
 const initialState = {
   profile: {user_name: 'Anikram', user_id: 'sdfsdf-sdfsdf-sdfsdf-sdfsdf', user_email: 'initial@email.com'},
@@ -68,7 +69,7 @@ export const loginUser = (data) => async (dispatch) => {
   if (parseRes.token) {
     dispatch(toggleAuthenticated(true))
     dispatch(setUserToken(parseRes.token))
-    const response = await authAPI.fetchUserProfile(parseRes.token)
+    const response = await profileAPI.fetchUserProfile(parseRes.token)
     const parsed = await response.json();
     dispatch(setUserProfile(parsed))
     toast.success("Logged in successfully!")
@@ -90,7 +91,7 @@ export const setToken = (token) => async (dispatch, getState) => {
 }
 
 export const fetchProfile = (token) => async (dispatch) => {
-  const response = await authAPI.fetchUserProfile(token)
+  const response = await profileAPI.fetchUserProfile(token)
   const parseRes = await response.json();
   if (parseRes.token !== '') {
     dispatch(setUserProfile(parseRes))

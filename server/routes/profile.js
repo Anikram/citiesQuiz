@@ -40,10 +40,10 @@ router.get('/game', authorization, async (req,res) => {
 
 router.post('/game',authorization, async (req,res) => {
   try {
-
-    const newGame = await pool.query("INSERT INTO games (user_id, region_id) VALUES($1,$2) RETURNING * ",[req.body.user_id,1])
-    const regionCities = await pool.query("SELECT cities FROM regions WHERE region_id = $1",[1])
-
+    const {user_id, region_name} = req.body;
+    const region_id = await pool.query("SELECT (region_id) FROM regions WHERE region_name = $1",[region_name])
+    const newGame = await pool.query("INSERT INTO games (user_id, region_id) VALUES($1,$2) RETURNING * ",[user_id,region_id.rows[0].region_id])
+    const regionCities = await pool.query("SELECT cities FROM regions WHERE region_name = $1",[req.body.region_name])
     res.json({...newGame.rows[0],...regionCities.rows[0]})
   } catch (err) {
     console.error(err.message)

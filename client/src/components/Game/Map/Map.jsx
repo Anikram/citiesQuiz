@@ -37,8 +37,10 @@ function Map({cities, gameOverCallback}) {
       setCurrentCity({...city, visible: false});
       setGuessCities(guessCities + 1)
     } else if (!city) {
-      //gameOver hendle
+      //gameOver handle
       setGameIsOn(false)
+      setScore(0)
+      setGuessCities(0)
       gameOverCallback(score)
     } else {
       setCurrentCity({...currentCity, visible: true})
@@ -52,7 +54,7 @@ function Map({cities, gameOverCallback}) {
 
   useEffect(() => {
     setGameIsOn(true)
-  }, [])
+  }, [gameIsOn])
 
   return (
     <ReactMapGL

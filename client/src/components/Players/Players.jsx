@@ -3,6 +3,8 @@ import s from './Players.module.css';
 import Avatar from "../common/Avatar/Avatar";
 import Button from "../common/Button/Button";
 import {toast} from "react-toastify";
+import sBtn from "../common/Button/Button.module.css";
+import {Link} from "react-router-dom";
 
 const Player = ({name = 'placeholder', score = '1234', avatarUrl}) => {
   return (
@@ -41,7 +43,7 @@ const Players = ({profile,fetchTopUsers, fetchProfile, users, isAuth}) => {
               <tbody>
               {
                 users.map(u => {
-                  return <Player name={u.user_name} score={u.top_score}/>
+                  return <Player key={u.user_name} name={u.user_name} score={u.top_score}/>
                 })
               }
               </tbody>
@@ -51,7 +53,7 @@ const Players = ({profile,fetchTopUsers, fetchProfile, users, isAuth}) => {
       </div>
 
       <div className={s.actionDiv}>
-        {!isAuth || <Button side='right' text='New game'/>}
+        {!isAuth || <Link to='/game'><button className={sBtn.button + ' btn btn-info my-3'}>New game</button></Link>}
       </div>
     </div>
   )

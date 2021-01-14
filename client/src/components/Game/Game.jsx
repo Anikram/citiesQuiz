@@ -10,7 +10,6 @@ const Game = ({fetchGameData, profile,createNewGame, gameData}) => {
   const [startPopPanel, setStartPopPanel] = useState(true);
   const [finishPopPanel, setFinishPopPanel] = useState(false);
   const [gameOverPanel, setGameOverPanel] = useState(false);
-  const [region, setRegion] = useState('');
   const [finalScore, setFinalScore] = useState(0);
 
   useEffect(() => {
@@ -19,11 +18,9 @@ const Game = ({fetchGameData, profile,createNewGame, gameData}) => {
 
   const loadCities = (value) => {
     console.log('loadCities triggered')
-    console.log(value.toLowerCase())
+    console.log('region: ' + value)
     setStartPopPanel(false)
-    createNewGame(profile.user_id)
-    // fetchGameData(1)
-    //  Load cities to reducer
+    createNewGame(profile.user_id,value.toLowerCase())
   }
 
   const exitGame = () => {
@@ -53,11 +50,12 @@ const Game = ({fetchGameData, profile,createNewGame, gameData}) => {
   }
 
   const retryCallBack = () => {
-
+    setStartPopPanel(true)
+    setGameOverPanel(false)
   }
 
   const quitCallBack = () => {
-
+    setGameRunning(false)
   }
 
   return (

@@ -1,5 +1,3 @@
-import axiosInstance from "./configApi";
-
 const authAPI = {
   async registerUser(data) {
     const response =  await fetch('http://localhost:5000/auth/register',{
@@ -25,15 +23,6 @@ const authAPI = {
       method: 'POST',
       headers: {"Content-Type": "application/json"},
       body: body
-    })
-
-    return response
-  },
-
-  async fetchUserProfile(token){
-    const response = await fetch('http://localhost:5000/profile', {
-      method: "GET",
-      headers: {token: token}
     })
 
     return response
