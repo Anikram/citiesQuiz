@@ -3,6 +3,7 @@ import s from './Game.module.css';
 import Map from "./Map/Map";
 import PopUpPanel from "../common/Panels/PopUpPannel/PopUpPanel";
 import {Redirect} from "react-router-dom";
+import buttonStyle from "../common/Button/Button.module.css";
 
 const Game = ({fetchGameData, profile,createNewGame, gameData}) => {
   const [gameRunning, setGameRunning] = useState(true);
@@ -65,13 +66,14 @@ const Game = ({fetchGameData, profile,createNewGame, gameData}) => {
 
         <div className={`middle ${s.gameContainer}`}>
           <Map cities={cities} gameOverCallback={gameOver}/>
+          <button onClick={exitGame} className={"btn btn-warning " + buttonStyle.button +' '+ s.quitButtonDiv}>Quit</button>
         </div>
         {!startPopPanel ||
         <PopUpPanel text={`Pick a region you want to play at:`} confirmText={`Start`} declineText={`Cancel`}
                     onSuccess={loadCities} onDecline={exitGame} wDropdown={true} dropdownText={'Regions'}/>
         }
-        {!finishPopPanel || <PopUpPanel text={`Do you want the game to continue?`} confirmText={`Yes`} declineText={`No`}
-                                        onSuccess={continueGame} onDecline={quitGame}/>
+        {!finishPopPanel || <PopUpPanel text={`Are you sure you want to quit?`} confirmText={`Yes`} declineText={`No`}
+                                        onSuccess={quitGame} onDecline={continueGame}/>
         }
         {!gameOverPanel ||
         <PopUpPanel text={`Game is over with final score of ${finalScore} km!`} confirmText={`Retry`} declineText={`Thank you`}

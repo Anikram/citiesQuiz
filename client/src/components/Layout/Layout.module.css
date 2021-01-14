@@ -1,5 +1,5 @@
 .header {
-  height: 6rem;
+  max-height: 15vh;
   background-color: #282c34;
 }
 
@@ -20,5 +20,6 @@
 }
 
 .footer {
+  height: 5vh;
   background-color: #282c34;
 }

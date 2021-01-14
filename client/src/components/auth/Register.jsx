@@ -1,10 +1,10 @@
-import React, {Fragment, useState} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {toast} from "react-toastify";
 import buttonStyle from "../common/Button/Button.module.css";
 import authAPI from "../../api/authAPI";
 
-const Register = ({setAuth}) => {
+const Register = ({setAuth, registerUser}) => {
   const [inputs, setInputs] = useState({
     name: '',
     email: '',
@@ -19,29 +19,8 @@ const Register = ({setAuth}) => {
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
-
     try {
-      const body = {email, password, name}
-
-      const response = await authAPI.registerUser(JSON.stringify(body))
-
-      const parseRes = await response.json();
-
-      if(parseRes.token){
-        localStorage.setItem("token", parseRes.token);
-        setAuth(true);
-        toast.success("Registered successfully!")
-      } else {
-        setAuth(false);
-
-        if (parseRes.errors) {
-          parseRes.errors.map(e => {
-            toast.error(`${e.param} has ${e.msg}`)
-          })
-        } else {
-          toast.error(parseRes)
-        }
-      }
+      registerUser(email, password, name)
     } catch (err) {
       console.error(err.message)
     }

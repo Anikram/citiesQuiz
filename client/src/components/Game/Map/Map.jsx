@@ -1,12 +1,15 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import ReactMapGL, {Marker} from 'react-map-gl';
-import {faMapMarker} from "@fortawesome/free-solid-svg-icons";
+import {faDoorOpen, faMapMarker} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import s from './Map.module.css'
+// import sBtn from '../../../components/common/Button/Button.module.css'
+import Button from "../../common/Button/Button";
+import buttonStyle from "../../common/Button/Button.module.css";
 
-function Map({cities, gameOverCallback}) {
+function Map({cities, gameOverCallback,quitButtonCb}) {
   const [gameIsOn, setGameIsOn] = useState(false);
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState(1500);
   const [currentCity, setCurrentCity] = useState({
     visible: false,
     lat: 0,
@@ -21,7 +24,7 @@ function Map({cities, gameOverCallback}) {
     longitude: 11.5761,
     zoom: 3.5,
     width: "100%",
-    height: "100%"
+    height: "80vh"
   });
 
 
@@ -39,17 +42,22 @@ function Map({cities, gameOverCallback}) {
     } else if (!city) {
       //gameOver handle
       setGameIsOn(false)
-      setScore(0)
+      setScore(1500)
       setGuessCities(0)
       gameOverCallback(score)
     } else {
       setCurrentCity({...currentCity, visible: true})
-      setScore(score + 1)
+      setScore(score - 1)
       const timer = setTimeout(() => {
         setCurrentCity({...city, visible: false});
         setGuessCities(guessCities + 1)
-      }, 1)
+      }, 2500)
     }
+  }
+  const QUIT_BUTTON_STYLING = {
+    position: 'fixed',
+    bottom: '10vh',
+    left: '10vw',
   }
 
   useEffect(() => {
@@ -71,8 +79,10 @@ function Map({cities, gameOverCallback}) {
             <div className={s.cityTitleDiv}>{currentCity.capitalCity}</div>
             <div className={s.scoreDiv}>Score: {score} km</div>
           </Fragment>
-          :
-          <div className={s.cityTitleDiv}>Click to start</div>
+          : <Fragment>
+            <div className={s.cityTitleDiv}>Click to start</div>
+          </Fragment>
+
         }
         <Fragment>
           <Marker latitude={currentCity.lat} longitude={currentCity.long} offsetLeft={-20} offsetTop={-10}>

@@ -31,7 +31,9 @@
   height: 5vh;
 }
 
-.container {
+.container-fluid{
+  overflow-x: hidden;
+  overflow-y: hidden;
   background-color: aliceblue;
 }
 

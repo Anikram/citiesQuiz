@@ -7,10 +7,10 @@ import {Link, Redirect} from "react-router-dom";
 const Profile = ({setAuth, isAuthenticated, fetchProfile, profile, deleteToken}) => {
 
   useEffect(() => {
-    getName()
-  },[])
+    loadUserData()
+  },[isAuthenticated])
 
-  async function getName() {
+  async function loadUserData() {
     try {
       fetchProfile(localStorage.getItem("token"))
     } catch (err) {

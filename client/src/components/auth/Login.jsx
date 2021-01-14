@@ -17,8 +17,12 @@ const Login = ({setAuth, loginUser}) => {
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
-    const body = {email, password}
-    loginUser(body)
+    try {
+      loginUser(email, password)
+    } catch (err) {
+      console.error(err.message)
+    }
+
   }
   return <div className='middle'>
     <h1 className="text-center py-5">Login</h1>

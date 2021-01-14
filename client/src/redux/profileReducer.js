@@ -61,9 +61,8 @@ export const setIsAuthenticated = (bool) => async (dispatch, getState) => {
 }
 
 
-export const loginUser = (data) => async (dispatch) => {
-  const response = await authAPI.loginUser(JSON.stringify(data))
-
+export const loginUser = (email, password) => async (dispatch) => {
+  const response = await authAPI.loginUser(email, password)
   const parseRes = await response.json()
 
   if (parseRes.token) {
@@ -96,7 +95,6 @@ export const fetchProfile = (token) => async (dispatch) => {
   if (parseRes.token !== '') {
     dispatch(setUserProfile(parseRes))
   } else {
-    console.log('fetchProfile else branch '+parseRes)
     dispatch(toggleAuthenticated(false));
     if (parseRes.errors) {
       parseRes.errors.map(e => {
@@ -113,6 +111,32 @@ export const fetchProfile = (token) => async (dispatch) => {
 export const deleteToken = () => async (dispatch) => {
   dispatch(deleteUserToken())
   dispatch(toggleAuthenticated(false))
+}
+
+export const registerUser = (email, password, name) => async (dispatch) => {
+  const response = await authAPI.registerUser(email, password, name)
+
+
+  const parseRes = await response.json();
+  console.log(parseRes)
+
+  if(parseRes.token){
+    dispatch(loginUser(email, password));
+    localStorage.setItem("token", parseRes.token);
+    dispatch(setIsAuthenticated(true));
+    dispatch(fetchProfile(parseRes.token))
+    toast.success("Registered successfully!")
+  } else {
+    dispatch(setIsAuthenticated(false));
+
+    if (parseRes.errors) {
+      parseRes.errors.map(e => {
+        toast.error(`${e.param} has ${e.msg}`)
+      })
+    } else {
+      toast.error(parseRes)
+    }
+  }
 }
 
 export default profileReducer;

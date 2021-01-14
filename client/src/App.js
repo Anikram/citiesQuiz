@@ -18,7 +18,7 @@ import {
   checkUserAuthenticated,
   deleteToken,
   fetchProfile,
-  loginUser,
+  loginUser, registerUser,
   setIsAuthenticated,
   setToken
 } from "./redux/profileReducer";
@@ -50,7 +50,7 @@ class App extends React.Component {
       <Fragment>
         <Header isAuthenticated={this.props.isAuthenticated} profile={this.props.profile} setAuth={setIsAuthenticated}
                 deleteToken={this.props.deleteToken}/>
-        <div className='container col'>
+        <div className='container-fluid p-0'>
           <ToastContainer/>
           <Switch>
             <Route exact path="/" render={
@@ -65,8 +65,8 @@ class App extends React.Component {
             }
             />
             <Route exact path="/register" render={props => !this.props.isAuthenticated
-              ? <Register {...props} setAuth={setIsAuthenticated}/>
-              : <Redirect to="/profile"/>
+              ? <Register {...props} setAuth={setIsAuthenticated} registerUser={this.props.registerUser}/>
+              : <Redirect to="/"/>
             }
             />
             <Route exact path="/profile" render={props => this.props.isAuthenticated
@@ -83,7 +83,7 @@ class App extends React.Component {
             }/>
           </Switch>
         </div>
-        <Footer/>
+        <Footer />
       </Fragment>
     )
   }
@@ -112,7 +112,8 @@ const AppContainer = compose(
     deleteToken,
     fetchTopUsers,
     fetchGameData,
-    createNewGame
+    createNewGame,
+    registerUser
   }))(App);
 
 

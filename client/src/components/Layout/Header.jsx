@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import PlayerPanel from "../common/Panels/Player/PlayerPanel";
 import s from "./Layout.module.css"
 import style from "../common/Button/Button.module.css";
@@ -10,6 +10,9 @@ const Header = ({isAuthenticated, setAuth, profile,deleteToken}) => {
     deleteToken()
     setAuth(false)
   }
+  useEffect(()=>{
+
+  },[isAuthenticated])
   return (
     <header className={'header ' + s.header}>
       <div>

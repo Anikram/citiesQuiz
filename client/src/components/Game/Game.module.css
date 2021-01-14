@@ -4,3 +4,16 @@
     width: 100vw;
     cursor: pointer;
 }
+.quitButtonDiv {
+    position: fixed;
+    bottom: 10vh;
+    left: 5vw;
+    /*transform: translate(-15vh,-10vw);*/
+    /*font-size: 2rem;*/
+    /*width: auto;*/
+    /*padding: 0.5rem 1rem;*/
+    /*background-color: #282c34;*/
+    /*color: aliceblue;*/
+    /*border-radius: 1rem;*/
+
+}
