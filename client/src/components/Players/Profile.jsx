@@ -1,10 +1,10 @@
 import React, {Fragment, useEffect} from "react";
 import {toast} from "react-toastify";
-import sBtn from '../common/Button/Button.module.css'
+import sBtn from '../common/formControls/Button/Button.module.css'
 import s from './Players.module.css'
 import {Link, Redirect} from "react-router-dom";
 
-const Profile = ({setAuth, isAuthenticated, fetchProfile, profile, deleteToken}) => {
+const Profile = ({isAuthenticated, fetchProfile, profile, deleteToken}) => {
 
   useEffect(() => {
     loadUserData()

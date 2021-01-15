@@ -1,0 +1,45 @@
+.error input {
+    border: 2px solid crimson;
+    display: block;
+}
+
+.error span {
+    position: relative;
+    top: -3px;
+    color: aliceblue;
+    background-color: crimson;
+    /*border: 1px solid #282c34;*/
+    border-radius: 0.5rem 1rem 0.5rem 1rem;
+    padding: 0.4rem 1rem;
+}
+
+.formError {
+    position: relative;
+    /*top: 5rem;*/
+    color: aliceblue;
+    background-color: crimson;
+    /*border: 1px solid #282c34;*/
+    border-radius: 0.5rem 1rem 0.5rem 1rem;
+    margin-top: 1rem;
+    padding: 0.4rem 1rem;
+    animation: shaking 0.3s ease-in-out;
+}
+
+@keyframes shaking {
+    1% {
+        left: 0px;
+    }
+    25% {
+        left: 10px
+    }
+    50% {
+        left: 5px
+    }
+    75%{
+        left: 10px
+    }
+    100% {
+        left: 0px;
+    }
+}
+

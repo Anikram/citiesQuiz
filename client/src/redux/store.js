@@ -5,12 +5,14 @@ import {composeWithDevTools} from "redux-devtools-extension";
 import appReducer from "./appReducer";
 import usersReducer from "./usersReducer";
 import gameReducer from "./gameReducer";
+import { reducer as formReducer } from 'redux-form'
 
 let reducers = combineReducers({
   profile: profileReducer,
   app: appReducer,
   users: usersReducer,
-  games: gameReducer
+  games: gameReducer,
+  form: formReducer
 });
 
 const store = createStore(reducers, composeWithDevTools(

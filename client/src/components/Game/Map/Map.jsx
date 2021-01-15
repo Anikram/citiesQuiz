@@ -4,8 +4,8 @@ import {faDoorOpen, faMapMarker} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import s from './Map.module.css'
 // import sBtn from '../../../components/common/Button/Button.module.css'
-import Button from "../../common/Button/Button";
-import buttonStyle from "../../common/Button/Button.module.css";
+import Button from "../../common/formControls/Button/Button";
+import buttonStyle from "../../common/formControls/Button/Button.module.css";
 
 function Map({cities, gameOverCallback,quitButtonCb}) {
   const [gameIsOn, setGameIsOn] = useState(false);

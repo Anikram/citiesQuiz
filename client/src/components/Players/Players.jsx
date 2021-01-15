@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import s from './Players.module.css';
 import Avatar from "../common/Avatar/Avatar";
-import Button from "../common/Button/Button";
+import Button from "../common/formControls/Button/Button";
 import {toast} from "react-toastify";
-import sBtn from "../common/Button/Button.module.css";
+import sBtn from "../common/formControls/Button/Button.module.css";
 import {Link} from "react-router-dom";
 
 const Player = ({name = 'placeholder', score = '1234', avatarUrl}) => {

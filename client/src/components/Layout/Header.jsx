@@ -1,9 +1,9 @@
 import React, {Fragment, useEffect} from 'react';
 import PlayerPanel from "../common/Panels/Player/PlayerPanel";
 import s from "./Layout.module.css"
-import style from "../common/Button/Button.module.css";
+import style from "../common/formControls/Button/Button.module.css";
 import {Link} from "react-router-dom";
-import LogoutButton from "../common/Button/LogoutButton";
+import LogoutButton from "../common/formControls/Button/LogoutButton";
 
 const Header = ({isAuthenticated, setAuth, profile,deleteToken}) => {
   const logoutUser = () => {

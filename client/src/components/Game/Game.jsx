@@ -3,7 +3,7 @@ import s from './Game.module.css';
 import Map from "./Map/Map";
 import PopUpPanel from "../common/Panels/PopUpPannel/PopUpPanel";
 import {Redirect} from "react-router-dom";
-import buttonStyle from "../common/Button/Button.module.css";
+import buttonStyle from "../common/formControls/Button/Button.module.css";
 
 const Game = ({fetchGameData, profile,createNewGame, gameData, finishGame, deleteGame}) => {
   const [gameRunning, setGameRunning] = useState(true);

@@ -25,9 +25,13 @@ const initializingSuccess = () => ({type: INITIALIZATION_SUCCESS});
 
 export const initializeApp = (token) => async (dispatch, getState) => {
   dispatch(setToken(token))
-  dispatch(checkUserAuthenticated())
-  dispatch(fetchProfile())
-  dispatch(initializingSuccess());
+  dispatch(checkUserAuthenticated(getState().profile.token))
+  if (getState().profile.isAuthenticated) {
+    dispatch(fetchProfile())
+    dispatch(initializingSuccess());
+  } else {
+    dispatch(initializingSuccess());
+  }
 }
 
 export default appReducer;
