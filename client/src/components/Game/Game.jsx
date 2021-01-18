@@ -67,13 +67,17 @@ const Game = ({isAuth, profile, createNewGame, gameData, finishGame, deleteGame,
     setPausePannel(true)
   }
 
+  const handleGameFinish = () => {
+    return cities.length === roundNumber ? finishGame(gameData.game_id, guessedCities) : deleteGame(gameData.game_id)
+  }
+
   const quitGame = () => {
+    handleGameFinish()
     setExitGameTrigger(true)
   }
 
   const retryGame = () => {
-    cities.length === roundNumber ? finishGame(gameData.game_id, distance) : deleteGame(gameData.game_id)
-
+    handleGameFinish()
     setGameRunning(false)
     setGameOverPanel(false)
     setGameInit(false)

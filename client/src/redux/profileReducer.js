@@ -114,8 +114,6 @@ export const fetchProfile = (token) => async (dispatch) => {
       toast.error(parseRes)
     }
   }
-
-
 }
 
 export const deleteToken = () => async (dispatch) => {
@@ -125,10 +123,7 @@ export const deleteToken = () => async (dispatch) => {
 
 export const registerUser = (email, password, name) => async (dispatch) => {
   const response = await authAPI.registerUser(email, password, name)
-
-
   const parseRes = await response.json();
-  console.log(parseRes)
 
   if(parseRes.token){
     dispatch(loginUser(email, password));
