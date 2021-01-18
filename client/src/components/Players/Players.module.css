@@ -1,6 +1,5 @@
 .playersContainer {
-    padding: 3rem;
-
+    padding: 2rem 5rem;
 }
 
 .playersPanel {
@@ -80,8 +79,8 @@
 
 .scoreSpan {
     font-weight: 600;
-    margin-right: 1rem;
-    margin-left: 1rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
     font-style: italic;
     color: crimson;
 }
@@ -95,5 +94,13 @@
         margin: 2rem 1rem;
         min-width: 95%;
     }
+    .playerContainer {
+        padding: 2rem 5rem;
+    }
+}
 
+@media screen and (max-width: 550px){
+    .playerContainer {
+        padding: 2rem 5rem;
+    }
 }

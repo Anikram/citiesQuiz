@@ -24,7 +24,6 @@ const Game = ({isAuth, profile, createNewGame, gameData, finishGame, deleteGame,
 
   useEffect(() => {
     //initializing conditions
-    console.log("Game render")
     if (gameData.cities) setCities(gameData.cities)
     if (cities) setCurrentCity(cities[roundNumber])
     if (currentCity) setGameInit(true)

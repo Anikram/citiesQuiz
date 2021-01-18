@@ -13,6 +13,9 @@
 }
 
 .scoreDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     top: 15vh;
     right: 10vw;
@@ -26,12 +29,24 @@
 
 }
 
-.visible {
-    display: none;
-}
-.invisible {
+.successDiv {
+    position: relative;
+    top: 20%;
+    left: 50%;
+    transform: translate(-30%, -50%);
     display: block;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 5rem;
+    background-color: rgba(173, 255, 47, 0.5);
+    color: forestgreen;
+    font-size: 5rem;
+    padding: 0 0 1.5rem 2rem;
+    -webkit-transition-duration: 2s;
+    -webkit-transition-property: all;
+    -webkit-transition-timing-function: ease-in-out;
 }
+
 
 @media screen and (max-width: 800px) {
     .scoreDiv,.cityTitleDiv {

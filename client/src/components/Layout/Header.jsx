@@ -10,8 +10,8 @@ const Header = ({isAuthenticated, setAuth, profile, deleteToken}) => {
     deleteToken()
     setAuth(false)
   }
-  useEffect(() => {
 
+  useEffect(() => {
   }, [isAuthenticated])
   return (
     <header className={'header ' + s.header}>
@@ -30,8 +30,6 @@ const Header = ({isAuthenticated, setAuth, profile, deleteToken}) => {
             <Link to='/login' className={style.button + ' btn btn-dark'}>Login</Link>
             <Link to='/register' className={style.button + ' btn btn-dark'}>Register</Link>
           </div>
-
-
         }
       </div>
     </header>

@@ -1,14 +1,15 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import ReactMapGL, {Marker} from 'react-map-gl';
-import {faCrown} from "@fortawesome/free-solid-svg-icons";
+import {faCrown,faCheck} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import s from './Map.module.css'
 import {faDotCircle} from "@fortawesome/free-regular-svg-icons";
 import {calculateDistance} from "../../../utils/helpers";
 
-function Map({city, onRoundFinish,currentScore}) {
+function Map({city, onRoundFinish, currentScore}) {
   const [choiceMade, setChoiceMade] = useState(false)
   const [guessPosition, setGuessPosition] = useState({});
+  const [successDistance, setSuccessDistance] = useState(0);
 
   const [viewport, setViewport] = useState({
     latitude: 48.1599,
@@ -18,23 +19,24 @@ function Map({city, onRoundFinish,currentScore}) {
     height: "85vh"
   });
 
-
-
-
   const handleMapClick = ({lngLat: [longitude, latitude]}) => {
     setGuessPosition({longitude, latitude})
     setChoiceMade(true)
-    const distance = calculateDistance(latitude,longitude, city.lat, city.long)
-    setTimeout(() => {
-      onRoundFinish(distance)
-      setGuessPosition({})
-      setChoiceMade(false)
-    },1500)
+    const distance = calculateDistance(latitude, longitude, city.lat, city.long)
+    if (distance <= 50) {
+      setSuccessDistance(distance)
+    }
+
+      setTimeout(() => {
+        onRoundFinish(distance)
+        setGuessPosition({})
+        setChoiceMade(false)
+        setSuccessDistance(0)
+      }, 2750)
   }
 
   useEffect(() => {
-    console.log('Map render')
-  }, [city,currentScore])
+  }, [city, currentScore])
 
   return (
     <ReactMapGL
@@ -48,25 +50,32 @@ function Map({city, onRoundFinish,currentScore}) {
 
       <Fragment>
 
-        { city && <Fragment>
+        {city && <Fragment>
           <div className={s.cityTitleDiv}>{city.capitalCity}</div>
           <div className={s.scoreDiv}>Distance: {currentScore} km</div>
+          { successDistance !== 0 &&
+          <div className={s.successDiv}>
+            <FontAwesomeIcon icon={faCheck}/>
+          </div> }
         </Fragment>}
 
         <Fragment>
           {
             choiceMade &&
-          <Marker latitude={city.lat} longitude={city.long} offsetLeft={-10} offsetTop={-12}>
-            <div><FontAwesomeIcon
-              icon={faDotCircle}/></div>
-          </Marker>
+            <Marker latitude={city.lat} longitude={city.long} offsetLeft={-10} offsetTop={-12}>
+              <div><FontAwesomeIcon
+                icon={faDotCircle}/></div>
+            </Marker>
           }
 
           {
-            guessPosition.latitude && <Marker latitude={guessPosition.latitude} longitude={guessPosition.longitude} offsetLeft={-10} offsetTop={-15}>
-              <div><FontAwesomeIcon
-                icon={faCrown}/></div>
-            </Marker>
+            guessPosition.latitude && <Fragment>
+              <Marker latitude={guessPosition.latitude} longitude={guessPosition.longitude} offsetLeft={-10}
+                      offsetTop={-15}>
+                <div><FontAwesomeIcon
+                  icon={faCrown}/></div>
+              </Marker>
+            </Fragment>
           }
 
         </Fragment>

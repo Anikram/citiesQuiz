@@ -6,7 +6,6 @@ import {Link, Redirect} from "react-router-dom";
 const Profile = ({isAuthenticated, fetchProfile, profile, deleteToken}) => {
 
   useEffect(() => {
-    console.log('Profile render')
     loadUserData()
   },[isAuthenticated])
 
@@ -18,7 +17,7 @@ const Profile = ({isAuthenticated, fetchProfile, profile, deleteToken}) => {
     }
   }
 
-  return isAuthenticated ? <div className='middle ml-5'>
+  return isAuthenticated ? <div className={s.playersContainer}>
     <h1 className='py-5'>Greetings, {profile.user_name}! </h1>
     <h2 className='py-1'>Your best score is <span className={s.scoreSpan}>{profile.top_score}</span>cities so far!</h2>
     <h3 className='py-1'>Do you want to improve it?</h3>
