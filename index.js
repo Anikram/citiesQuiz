@@ -14,10 +14,14 @@ if (process.env.NODE_ENV === "production") {
 
 //ROUTES
 //auth
-app.use('/auth', require('./routes/jwtAuth'));
+app.use('/api/auth', require('./routes/jwtAuth'));
 //profile
-app.use('/profile', require('./routes/profile'));
-app.use('/users', require('./routes/users'));
+app.use('/api/profile', require('./routes/profile'));
+app.use('/api/users', require('./routes/users'));
+
+app.get("*", (req,res) => {
+  res.sendFile(path.join(__dirname, "client/build/index.html"))
+})
 
 app.listen(PORT,() => {
   console.log(`Server is running on ${PORT} port.`)

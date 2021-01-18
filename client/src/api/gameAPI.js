@@ -9,7 +9,7 @@ const gameAPI = {
   createGame(user_id, token, region_name) {
     const data = {user_id, token, region_name};
     const body = JSON.stringify(data)
-    return fetch('http://localhost:5000/profile/game', {
+    return fetch('/api/profile/game', {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: body
@@ -19,7 +19,7 @@ const gameAPI = {
   finishGame(game_id, token, score) {
     const data = {game_id, token, score};
     const body = JSON.stringify(data)
-    return fetch('http://localhost:5000/profile/game', {
+    return fetch('/api/profile/game', {
       method: "PUT",
       headers: {"Content-Type": "application/json"},
       body: body
@@ -29,7 +29,7 @@ const gameAPI = {
   deleteGame(game_id, token) {
     const data = {game_id, token};
     const body = JSON.stringify(data)
-    return fetch('http://localhost:5000/profile/game', {
+    return fetch('/api/profile/game', {
       method: "DELETE",
       headers: {"Content-Type": "application/json"},
       body: body

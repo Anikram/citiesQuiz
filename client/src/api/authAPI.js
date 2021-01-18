@@ -2,7 +2,7 @@ const authAPI = {
   async registerUser(email, password, name) {
     const data = {email, password, name};
     const body = JSON.stringify(data);
-    return await fetch('http://localhost:5000/auth/register', {
+    return await fetch('/api/auth/register', {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: body
@@ -10,7 +10,7 @@ const authAPI = {
   },
 
   async isAuth(token) {
-    return await fetch('http://localhost:5000/auth/is-verify', {
+    return await fetch('/api/auth/is-verify', {
       method: "GET",
       headers: {token: token}
     })
@@ -19,7 +19,7 @@ const authAPI = {
   async loginUser(email, password){
     const data = {email, password};
     const body = JSON.stringify(data);
-    return await fetch("http://localhost:5000/auth/login", {
+    return await fetch("/api/auth/login", {
       method: 'POST',
       headers: {"Content-Type": "application/json"},
       body: body

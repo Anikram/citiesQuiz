@@ -1,6 +1,6 @@
 const usersAPI = {
   fetchTopUsers() {
-    return fetch('http://localhost:5000/users', {
+    return fetch('/api/users', {
       method: "GET"
     })
   }

@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index"
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && yarn install && yarn run build"
   },
   "keywords": [],
   "author": "",
