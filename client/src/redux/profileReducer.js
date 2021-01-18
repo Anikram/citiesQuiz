@@ -4,7 +4,7 @@ import profileAPI from "../api/profileApi";
 import {stopSubmit} from "redux-form";
 
 const initialState = {
-  profile: {user_name: 'Anikram', user_id: 'sdfsdf-sdfsdf-sdfsdf-sdfsdf', user_email: 'initial@email.com'},
+  profile: {user_name: 'Anikram', user_id: 'sdfsdf-sdfsdf-sdfsdf-sdfsdf', user_email: 'initial@email.com', top_score: 0},
   token: '',
   isAuthenticated: false
 }
@@ -46,6 +46,7 @@ export const toggleAuthenticated = (bool) => ({type: TOGGLE_IS_AUTH, bool})
 export const setUserToken = (token) => ({type: SET_TOKEN, token});
 export const deleteUserToken = () => ({type: DELETE_TOKEN});
 
+
 export const checkUserAuthenticated = (token) => async (dispatch, getState) => {
   const response = await authAPI.isAuth(token)
   console.log(response)
@@ -64,7 +65,6 @@ export const setIsAuthenticated = (bool) => async (dispatch, getState) => {
 export const loginUser = (email, password) => async (dispatch) => {
   const response = await authAPI.loginUser(email, password)
   const parseRes = await response.json()
-  console.log('incoming token: '+ parseRes.token)
 
   if (parseRes.token) {
     dispatch(toggleAuthenticated(true))
@@ -85,6 +85,18 @@ export const loginUser = (email, password) => async (dispatch) => {
     } else {
       toast.error(parseRes)
     }
+  }
+}
+
+export const setTopScore = (user_id, top_score) => async (dispatch, getState) => {
+
+  const response = await profileAPI.updateUserTopScore(user_id, getState().profile.token,top_score)
+  const parseRes = await response.json();
+  if (parseRes.errors) {
+    toast.error(parseRes)
+  } else {
+    console.log('ding!')
+    setUserProfile(parseRes)
   }
 }
 

@@ -8,7 +8,7 @@ const Profile = ({isAuthenticated, fetchProfile, profile, deleteToken}) => {
 
   useEffect(() => {
     loadUserData()
-  },[isAuthenticated])
+  },[isAuthenticated, profile.top_score])
 
   async function loadUserData() {
     try {

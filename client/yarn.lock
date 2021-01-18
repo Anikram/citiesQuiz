@@ -5450,6 +5450,11 @@ gensync@^1.0.0-beta.1:
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.2.tgz#32a6ee76c3d7f52d46b2b1ae5d93fea8580a25e0"
   integrity sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==
 
+geo-distance@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/geo-distance/-/geo-distance-0.2.0.tgz#687bfa32ebb95a51438d219592388d74776b4418"
+  integrity sha512-FAWcCG6vhrfHIXMBipeNj1p6U4NucdlOMoTYrgRtFdudZEQjjrCDTYaw2Nh5go9MhjhY/RcZ+GVlAOa/dLDiVQ==
+
 geojson-vt@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/geojson-vt/-/geojson-vt-3.2.1.tgz#f8adb614d2c1d3f6ee7c4265cad4bbf3ad60c8b7"

@@ -7,7 +7,7 @@ router.get('/',
   async (req,res) => {
     try {
       //req.user is a payload (../middleware/authorization.js)
-      const user = await pool.query("SELECT user_name,top_score,user_id FROM users WHERE user_id = $1",[req.user])
+      const user = await pool.query("SELECT user_name,top_score,user_id,top_score FROM users WHERE user_id = $1",[req.user])
 
       res.json(user.rows[0])
     } catch (err) {
@@ -15,6 +15,21 @@ router.get('/',
       res.status(500).send('Server error');
     }
   })
+router.put('/',
+  authorization,
+  async (req,res) => {
+    try {
+      const {top_score, user_id} = req.body;
+      console.log(top_score)
+      console.log(user_id)
+      const user = await pool.query("UPDATE users SET top_score=$1 WHERE user_id=$2 RETURNING *",[top_score, user_id]);
+      res.json(user.rows[0])
+    } catch (err) {
+      console.error(err.message)
+      res.status(500).send('Server error');
+    }
+  })
+
 router.get('/games',
   authorization,
   async (req,res) => {

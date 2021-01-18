@@ -20,7 +20,7 @@ import {
   fetchProfile,
   loginUser, registerUser,
   setIsAuthenticated,
-  setToken
+  setToken, setTopScore
 } from "./redux/profileReducer";
 import {initializeApp} from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
@@ -78,7 +78,7 @@ class App extends React.Component {
             <Route exact path='/game' render={props => this.props.isAuthenticated
               ? <Game fetchGameData={this.props.fetchGameData} profile={this.props.profile}
                       createNewGame={this.props.createNewGame} gameData={this.props.gameData}
-              deleteGame={this.props.deleteGame} finishGame={this.props.finishGame}/>
+              deleteGame={this.props.deleteGame} finishGame={this.props.finishGame} isAuth={this.props.isAuthenticated} setTopScore={this.props.setTopScore}/>
               : <Redirect to="/login"/>
 
             }/>
@@ -116,7 +116,8 @@ const AppContainer = compose(
     createNewGame,
     registerUser,
     finishGame,
-    deleteGame
+    deleteGame,
+    setTopScore
   }))(App);
 
 

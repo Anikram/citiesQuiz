@@ -1,88 +1,139 @@
-import React, {useEffect, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import s from './Game.module.css';
 import Map from "./Map/Map";
 import PopUpPanel from "../common/Panels/PopUpPannel/PopUpPanel";
 import {Redirect} from "react-router-dom";
 import buttonStyle from "../common/formControls/Button/Button.module.css";
+import RareMap from "./Map/RareMap";
 
-const Game = ({fetchGameData, profile,createNewGame, gameData, finishGame, deleteGame}) => {
-  const [gameRunning, setGameRunning] = useState(true);
+const Game = ({isAuth, profile, createNewGame, gameData, finishGame, deleteGame, setTopScore}) => {
+  const [exitGameTrigger, setExitGameTrigger] = useState(false)
+  const [gameRunning, setGameRunning] = useState(false);
+  const [gameInit, setGameInit] = useState(false);
+  const [roundNumber, setRoundNumber] = useState(0)
   const [cities, setCities] = useState([]);
+
+  const [guessedCities, setGuessedCities] = useState(0);
+  const [currentCity, setCurrentCity] = useState({});
+
+
   const [startPopPanel, setStartPopPanel] = useState(true);
-  const [finishPopPanel, setFinishPopPanel] = useState(false);
+  const [pausePannel, setPausePannel] = useState(false);
   const [gameOverPanel, setGameOverPanel] = useState(false);
-  const [finalScore, setFinalScore] = useState(0);
+  const [score, setScore] = useState(1500);
 
   useEffect(() => {
-    setCities(gameData.cities)
-  },[gameData])
+    if (gameData.cities) setCities(gameData.cities)
+    if (cities) setCurrentCity(cities[roundNumber])
+    if (currentCity) setGameInit(true)
 
-  const loadCities = (value) => {
-    console.log('loadCities triggered')
-    console.log('region: ' + value)
-    setStartPopPanel(false)
-    createNewGame(profile.user_id,value.toLowerCase())
+    if (gameRunning) {
+      if (score <= 0) setScore(0)
+      if (score <= 0 || ((cities.length === roundNumber) && roundNumber !== 0)) {
+        setGameOverPanel(true)
+      }
+      if ((cities.length === roundNumber) && roundNumber !== 0) {
+        console.log('end game condition to update the score')
+        if (profile.top_score < score) {
+          setTopScore(profile.user_id, score)
+        }
+      }
+    }
+
+
+  }, [cities, gameData, currentCity, score, roundNumber])
+
+
+  const initGame = (value) => {
+    if (!isAuth) setExitGameTrigger(true)
+
+    createNewGame(profile.user_id, value.toLowerCase())
+    if (gameInit) setGameRunning(true)
+
+    // fetchGameData(gameData.game_id)
   }
 
-  const exitGame = () => {
+  const gameRoundHandle = (roundData) => {
+    console.log('Distance: ' + roundData)
+    if (roundData <= 50) setGuessedCities((c) => c + 1)
+    setScore((score) => score - roundData)
+    setRoundNumber((round) => (round + 1))
+  }
+
+  const pauseGame = () => {
     console.log('exitGame triggered')
     setStartPopPanel(false)
-    setFinishPopPanel(true)
+    setPausePannel(true)
     //show popup and exit to profile
   }
 
+  const updateTopScore = () => {
+
+  }
+
   const quitGame = () => {
-    console.log('quit game triggered')
-    setFinishPopPanel(false)
+    console.log('quit game!')
+    console.log(profile.top_score)
+    console.log(score)
+    // updateTopScore()
+    setExitGameTrigger(true)
+  }
+
+  const retryGame = () => {
+    console.log('Retry!')
+    cities.length === roundNumber ? finishGame(gameData.game_id,score) : deleteGame(gameData.game_id)
+    // updateTopScore()
     setGameRunning(false)
-    deleteGame(gameData.game_id)
+    setGameOverPanel(false)
+    setGameInit(false)
+    setCities([])
+    setScore(1500)
+    setGuessedCities(0)
+    setCurrentCity({})
+    setRoundNumber(0)
+    setStartPopPanel(true)
   }
 
   const continueGame = () => {
     console.log('continue game triggered')
-    setFinishPopPanel(false)
+    setPausePannel(false)
     if (!cities.length > 0) {
       setStartPopPanel(true)
     }
   }
 
-  const handleGameOver = (score) => {
-    setFinalScore(score)
-    setGameOverPanel(true)
-  }
-
-  const retryCallBack = () => {
-    setStartPopPanel(true)
-    setGameOverPanel(false)
-    finishGame(gameData.game_id, finalScore)
-  }
-
-  const quitCallBack = () => {
-    setGameRunning(false)
-    finishGame(gameData.game_id, finalScore)
-  }
 
   return (
-    !gameRunning
-      ? <Redirect to="/profile"/>
-      : <div>
-
-        <div className={`middle ${s.gameContainer}`}>
-          <Map cities={cities} gameOverCallback={handleGameOver}/>
-          <button onClick={exitGame} className={"btn btn-warning " + buttonStyle.button +' '+ s.quitButtonDiv}>Quit</button>
-        </div>
-        {!startPopPanel ||
+    !exitGameTrigger
+      ? !gameRunning
+      ? <Fragment>
+        <RareMap/>
         <PopUpPanel text={`Pick a region you want to play at:`} confirmText={`Start`} declineText={`Cancel`}
-                    onSuccess={loadCities} onDecline={exitGame} wDropdown={true} dropdownText={'Regions'}/>
-        }
-        {!finishPopPanel || <PopUpPanel text={`Are you sure you want to quit?`} confirmText={`Yes`} declineText={`No`}
-                                        onSuccess={quitGame} onDecline={continueGame}/>
+                    onSuccess={initGame} onDecline={quitGame} wDropdown={true} dropdownText={'Regions'}/>
+
+      </Fragment>
+
+      : <div>
+        <div className={`middle ${s.gameContainer}`}>
+          {currentCity && <Map city={currentCity} onRoundFinish={gameRoundHandle} currentScore={score}/>}
+          <button onClick={pauseGame} className={"btn btn-warning " + buttonStyle.button + ' ' + s.quitButtonDiv}>Quit
+          </button>
+        </div>
+
+        {!pausePannel || <PopUpPanel text={`Are you sure you want to quit?`} confirmText={`Yes`} declineText={`No`}
+                                     onSuccess={quitGame} onDecline={continueGame}/>
         }
         {!gameOverPanel ||
-        <PopUpPanel text={`Game is over with final score of ${finalScore} km!`} confirmText={`Retry`} declineText={`Thank you`}
-                    onSuccess={retryCallBack} onDecline={quitCallBack} wDropdown={false}/>
+        <Fragment>
+          <RareMap/>
+          <PopUpPanel text={`Game is over. You guessed ${guessedCities} cities with ${score} km left!`}
+                      confirmText={`Retry`} declineText={`Thank you`}
+                      onSuccess={retryGame} onDecline={quitGame} wDropdown={false}/>
+        </Fragment>
+
         }
       </div>
+      : <Redirect to='/profile'/>
 
   )
 }
