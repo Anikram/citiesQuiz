@@ -9,7 +9,6 @@ const profileAPI = {
   async updateUserTopScore(user_id,token,top_score) {
     const data = {user_id, token, top_score};
     const body = JSON.stringify(data)
-    console.log(body)
     return await fetch('http://localhost:5000/profile', {
       method: "PUT",
       headers: {"Content-Type": "application/json"},

@@ -6,10 +6,11 @@ import {Link, Redirect} from "react-router-dom";
 const Profile = ({isAuthenticated, fetchProfile, profile, deleteToken}) => {
 
   useEffect(() => {
+    console.log('Profile render')
     loadUserData()
-  },[isAuthenticated, profile.top_score, profile])
+  },[isAuthenticated])
 
-  async function loadUserData() {
+  function loadUserData() {
     try {
       fetchProfile(localStorage.getItem("token"))
     } catch (err) {

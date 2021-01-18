@@ -32,3 +32,15 @@
 .invisible {
     display: block;
 }
+
+@media screen and (max-width: 800px) {
+    .scoreDiv,.cityTitleDiv {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .scoreDiv,.cityTitleDiv {
+        top: 20vh;
+    }
+}

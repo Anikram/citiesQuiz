@@ -2,23 +2,46 @@
     display: inline-block;
     flex-direction: row;
     align-items: center;
-    width: 70%;
-    /*height: 6rem;*/
-
+    width: auto;
 }
 
 .playerAvatar {
     display: inline-flex;
-    width: 30%;
+    max-width: 4rem;
+    min-width: 30%;
     vertical-align: middle;
-
 }
 
 .playerName {
     display: inline-block;
-    font-size: 1.5rem;
     vertical-align: middle;
     height: auto;
-    width: 70%;
+    width: 40%;
     color: aliceblue;
+}
+
+.playerName h2 {
+    font-size: 2rem;
+}
+
+@media screen and (max-width: 800px) {
+    .playerAvatar{
+        display: inline-block;
+    }
+
+    .playerName{
+        display: inline-block;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .playerPanel {
+        width: 50%;
+    }
+    .playerName h2 {
+        font-size: 1.5rem;
+    }
+    .playerName,.playerAvatar {
+        margin-top: 1rem;
+    }
 }

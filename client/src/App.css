@@ -3,37 +3,34 @@
   margin: 0;
 }
 
-.App {
+.wrapper {
+  min-height: 100vh;
   display: grid;
-  grid-template-areas:
-          'header header header'
-          'middle middle middle'
-          'footer footer footer';
-  background-color: aliceblue;
+  grid-template: minmax(4rem,auto) 1fr minmax(2rem,auto) / 1fr;
 }
 
 .header {
-  grid-area: header;
-  display: grid;
-  justify-items: center;
-  grid-template-columns: 1fr 1fr 1fr;
+  background-color: crimson;
 }
 
+
 .middle {
-  grid-area: middle;
-  grid-column-start: span 3;
-  /*background: bisque;*/
-  height: 83vh;
+  background-color: aliceblue;
 }
 
 .footer {
-  grid-area: footer;
-  height: 5vh;
+  background-color: #282c34;
 }
 
 .container-fluid{
   overflow-x: hidden;
   overflow-y: hidden;
   background-color: aliceblue;
+}
+
+@media screen and (max-width: 800px){
+  .header {
+
+  }
 }
 

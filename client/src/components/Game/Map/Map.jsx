@@ -15,7 +15,7 @@ function Map({city, onRoundFinish,currentScore}) {
     longitude: 11.5761,
     zoom: 3,
     width: "100%",
-    height: "80vh"
+    height: "85vh"
   });
 
 
@@ -29,11 +29,11 @@ function Map({city, onRoundFinish,currentScore}) {
       onRoundFinish(distance)
       setGuessPosition({})
       setChoiceMade(false)
-    },100)
+    },1500)
   }
 
   useEffect(() => {
-
+    console.log('Map render')
   }, [city,currentScore])
 
   return (
@@ -43,6 +43,7 @@ function Map({city, onRoundFinish,currentScore}) {
       mapStyle='mapbox://styles/anikram/ckiw58y2q4hhe1ap9wb16q2yh'
       onClick={handleMapClick}
       getCursor={(e) => "crosshair"}
+      onViewportChange={(viewport) => setViewport(viewport)}
     >
 
       <Fragment>

@@ -47,10 +47,10 @@ class App extends React.Component {
     }
 
     return (
-      <Fragment>
+      <div className='wrapper'>
         <Header isAuthenticated={this.props.isAuthenticated} profile={this.props.profile} setAuth={setIsAuthenticated}
                 deleteToken={this.props.deleteToken}/>
-        <div className='container-fluid p-0'>
+        <div className='middle'>
           <ToastContainer />
           <Switch>
             <Route exact path="/" render={
@@ -85,7 +85,7 @@ class App extends React.Component {
           </Switch>
         </div>
         <Footer />
-      </Fragment>
+      </div>
     )
   }
 }

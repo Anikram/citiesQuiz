@@ -3,7 +3,7 @@ import s from "./Layout.module.css"
 
 const Footer = () => {
   return (
-    <div className={'footer ' + s.footer + ''}>
+    <div className={'footer ' + s.footer}>
 
     </div>
   )

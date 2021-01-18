@@ -5,27 +5,26 @@ import style from "../common/formControls/Button/Button.module.css";
 import {Link} from "react-router-dom";
 import LogoutButton from "../common/formControls/Button/LogoutButton";
 
-const Header = ({isAuthenticated, setAuth, profile,deleteToken}) => {
+const Header = ({isAuthenticated, setAuth, profile, deleteToken}) => {
   const logoutUser = () => {
     deleteToken()
     setAuth(false)
   }
-  useEffect(()=>{
+  useEffect(() => {
 
-  },[isAuthenticated])
+  }, [isAuthenticated])
   return (
     <header className={'header ' + s.header}>
-      <div>
+      <div className={s.logo}>
         <Link to='/'><h1><span>C</span>ities Quiz</h1></Link>
       </div>
-      <div>
-
-      </div>
-      <div>
+      <div className={s.headerActions}>
         {isAuthenticated
           ? <Fragment>
-            <Link to='/profile'><PlayerPanel name={`${profile.user_name}`}/></Link>
-            <LogoutButton logoutUser={logoutUser}/>
+            <PlayerPanel name={`${profile.user_name}`}/>
+            <div className={s.headerButtons}>
+              <LogoutButton logoutUser={logoutUser}/>
+            </div>
           </Fragment>
           : <div className='my-4'>
             <Link to='/login' className={style.button + ' btn btn-dark'}>Login</Link>

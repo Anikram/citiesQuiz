@@ -18,6 +18,7 @@ const Player = ({name = 'placeholder', score = '1234', avatarUrl}) => {
 
 const Players = ({profile, fetchTopUsers, fetchProfile, users, isAuth}) => {
   useEffect(() => {
+    console.log('Players render')
     getName()
     fetchTopUsers()
   }, [])
@@ -31,7 +32,7 @@ const Players = ({profile, fetchTopUsers, fetchProfile, users, isAuth}) => {
   }
 
   return (
-    <div className={s.playersContainer + ' middle'}>
+    <div className={s.playersContainer}>
       <div className={s.playersPanel}>
         <div className={s.playersText}>
           <h1>Top score</h1>

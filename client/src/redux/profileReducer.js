@@ -91,7 +91,6 @@ export const setTopScore = (user_id, top_score) => async (dispatch, getState) =>
   if (parseRes.errors) {
     toast.error(parseRes)
   } else {
-    console.log('ding!')
     setUserProfile(parseRes)
   }
 }

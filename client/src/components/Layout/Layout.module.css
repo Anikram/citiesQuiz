@@ -1,6 +1,34 @@
 .header {
-  max-height: 15vh;
   background-color: #282c34;
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  display: inline-block;
+  max-width: 30%;
+  min-width: 30%;
+  margin-right: 2rem;
+  margin-left: 2rem;
+
+}
+.headerActions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 40%;
+  max-width: 40%;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.headerButtons {
+  display: inline-block;
+  max-width: 30%;
+}
+
+.logo h1 {
+  font-size: 0.5rem;
 }
 
 .header h1 {
@@ -20,6 +48,39 @@
 }
 
 .footer {
-  height: 5vh;
   background-color: #282c34;
+}
+
+@media screen and (max-width: 800px) {
+  .logo h1 {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .header h1 {
+    font-size: 2rem;
+  }
+  .headerActions {
+    min-width: 50%;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+  }
+  .headerButtons {
+    min-width: 50%;
+    margin-top: 1rem;
+  }
+  .logo {
+    max-width: 30%;
+    min-width: 30%;
+    margin-right: 0;
+    margin-left: 1rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .headerActions {
+    min-width: 70%;
+  }
 }

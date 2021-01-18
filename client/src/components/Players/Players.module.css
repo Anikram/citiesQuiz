@@ -1,6 +1,6 @@
 .playersContainer {
     padding: 3rem;
-    background-color: aliceblue;
+
 }
 
 .playersPanel {
@@ -84,4 +84,16 @@
     margin-left: 1rem;
     font-style: italic;
     color: crimson;
+}
+
+@media screen and (max-width: 800px) {
+    .playersContainer {
+        padding: 0.5rem;
+    }
+
+    .playersPanel {
+        margin: 2rem 1rem;
+        min-width: 95%;
+    }
+
 }
