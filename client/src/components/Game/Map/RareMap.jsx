@@ -15,7 +15,6 @@ function RareMap() {
       {...viewport}
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
       mapStyle='mapbox://styles/anikram/ckiw58y2q4hhe1ap9wb16q2yh'
-      // onViewportChange={(viewport) => setViewport(viewport)}
     >
 
     </ReactMapGL>

@@ -1,7 +1,4 @@
-import authAPI from "../api/authAPI";
 import {checkUserAuthenticated, fetchProfile, setToken} from "./profileReducer";
-import {fetchTopUsers} from "./usersReducer";
-
 
 const INITIALIZATION_SUCCESS = "/app/INITIALIZATION-SUCCESS";
 

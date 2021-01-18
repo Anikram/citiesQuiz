@@ -1,8 +1,6 @@
 import React, {useEffect} from 'react';
 import s from './Players.module.css';
 import Avatar from "../common/Avatar/Avatar";
-import Button from "../common/formControls/Button/Button";
-import {toast} from "react-toastify";
 import sBtn from "../common/formControls/Button/Button.module.css";
 import {Link} from "react-router-dom";
 
@@ -13,18 +11,16 @@ const Player = ({name = 'placeholder', score = '1234', avatarUrl}) => {
         <div className={s.playerAvaContainer}><Avatar/></div>
       </td>
       <td><span className={s.name}>{name}</span></td>
-      <td><span className={s.score}>{score + ' km'}</span></td>
+      <td><span className={s.score}>{score}</span></td>
     </tr>
   )
 }
 
-const Players = ({profile,fetchTopUsers, fetchProfile, users, isAuth}) => {
-
+const Players = ({profile, fetchTopUsers, fetchProfile, users, isAuth}) => {
   useEffect(() => {
     getName()
-    console.log(profile)
     fetchTopUsers()
-  },[])
+  }, [])
 
   async function getName() {
     try {
@@ -33,6 +29,7 @@ const Players = ({profile,fetchTopUsers, fetchProfile, users, isAuth}) => {
       console.error(err.message)
     }
   }
+
   return (
     <div className={s.playersContainer + ' middle'}>
       <div className={s.playersPanel}>
@@ -53,7 +50,9 @@ const Players = ({profile,fetchTopUsers, fetchProfile, users, isAuth}) => {
       </div>
 
       <div className={s.actionDiv}>
-        {!isAuth || <Link to='/game'><button className={sBtn.button + ' btn btn-info my-3'}>New game</button></Link>}
+        {!isAuth || <Link to='/game'>
+          <button className={sBtn.button + ' btn btn-info my-3'}>New game</button>
+        </Link>}
       </div>
     </div>
   )

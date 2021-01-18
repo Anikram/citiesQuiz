@@ -1,8 +1,8 @@
-import React, {Fragment} from "react";
+import React from "react";
 import buttonStyle from "./Button.module.css";
 import {toast} from "react-toastify";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faCoffee, faDoorOpen} from '@fortawesome/free-solid-svg-icons'
+import {faDoorOpen} from '@fortawesome/free-solid-svg-icons'
 
 const LogoutButton = ({logoutUser}) => {
   const onLogoutButtonClick = (e) => {

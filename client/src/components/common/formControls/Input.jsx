@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import s from './Input.module.css'
 
 const Input = ({input, meta, ...props}) => {

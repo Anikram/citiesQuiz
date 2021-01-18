@@ -17,7 +17,6 @@ let reducers = combineReducers({
 
 const store = createStore(reducers, composeWithDevTools(
   applyMiddleware(thunkMiddleware),
-  // other store enhancers if any
 ));
 
 window.store = store;

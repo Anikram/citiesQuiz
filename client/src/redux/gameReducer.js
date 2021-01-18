@@ -1,10 +1,8 @@
 import gameAPI from "../api/gameAPI";
 
-const CREATE_GAME = "CREATE-GAME";
 const LOAD_GAME_DATA = "LOAD-GAME-DATA";
 const FINISH_CURRENT_GAME = "FINISH-CURRENT-GAME";
 const CLEAR_GAME_DATA = "CLEAR-GAME-DATA";
-
 
 const initialState = {
   game_id: '',
@@ -59,8 +57,6 @@ export const createNewGame = (user_id, region_name) => async (dispatch, getState
   const gameData = await gameAPI.createGame(user_id, token, region_name);
   const parseRes = await gameData.json();
   const citiesWithNewProp = parseRes.cities.map(c => ({...c, guessed: false}))
-  console.log(parseRes)
-  console.log(citiesWithNewProp)
   dispatch(loadGameData(parseRes,citiesWithNewProp))
 }
 

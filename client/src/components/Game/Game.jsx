@@ -7,41 +7,45 @@ import buttonStyle from "../common/formControls/Button/Button.module.css";
 import RareMap from "./Map/RareMap";
 
 const Game = ({isAuth, profile, createNewGame, gameData, finishGame, deleteGame, setTopScore}) => {
-  const [exitGameTrigger, setExitGameTrigger] = useState(false)
-  const [gameRunning, setGameRunning] = useState(false);
-  const [gameInit, setGameInit] = useState(false);
-  const [roundNumber, setRoundNumber] = useState(0)
-  const [cities, setCities] = useState([]);
+  const [exitGameTrigger, setExitGameTrigger] = useState(false) //trigger end game redirect
+  const [gameRunning, setGameRunning] = useState(false); //game in progress?
+  const [gameInit, setGameInit] = useState(false); //game is init?
+  const [roundNumber, setRoundNumber] = useState(0); //current round
+  const [cities, setCities] = useState([]);//cities array from api
 
-  const [guessedCities, setGuessedCities] = useState(0);
-  const [currentCity, setCurrentCity] = useState({});
+  const [guessedCities, setGuessedCities] = useState(0); // number of guessed cities
+  const [currentCity, setCurrentCity] = useState({}); // current city for render a map
 
 
-  const [startPopPanel, setStartPopPanel] = useState(true);
-  const [pausePannel, setPausePannel] = useState(false);
-  const [gameOverPanel, setGameOverPanel] = useState(false);
-  const [score, setScore] = useState(1500);
+  const [startPopPanel, setStartPopPanel] = useState(true); // modal for game start (triggers init)
+  const [pausePannel, setPausePannel] = useState(false); // model for pause
+  const [gameOverPanel, setGameOverPanel] = useState(false); // modal for game over
+  const [distance, setDistance] = useState(1500); // distance limit
 
   useEffect(() => {
+    //initializing conditions
     if (gameData.cities) setCities(gameData.cities)
     if (cities) setCurrentCity(cities[roundNumber])
     if (currentCity) setGameInit(true)
 
+    //end game conditions
     if (gameRunning) {
-      if (score <= 0) setScore(0)
-      if (score <= 0 || ((cities.length === roundNumber) && roundNumber !== 0)) {
+      if (distance <= 0) setDistance(0)
+      if (distance <= 0 || ((cities.length === roundNumber) && roundNumber !== 0)) {
         setGameOverPanel(true)
       }
       if ((cities.length === roundNumber) && roundNumber !== 0) {
-        console.log('end game condition to update the score')
-        if (profile.top_score < score) {
-          setTopScore(profile.user_id, score)
+        if (profile.top_score < guessedCities) {
+          setTopScore(profile.user_id, guessedCities)
         }
       }
     }
 
 
-  }, [cities, gameData, currentCity, score, roundNumber])
+  }, [cities, gameData, currentCity,
+    distance, roundNumber, gameRunning,
+    guessedCities, profile.top_score,
+    profile.user_id, setTopScore])
 
 
   const initGame = (value) => {
@@ -50,44 +54,31 @@ const Game = ({isAuth, profile, createNewGame, gameData, finishGame, deleteGame,
     createNewGame(profile.user_id, value.toLowerCase())
     if (gameInit) setGameRunning(true)
 
-    // fetchGameData(gameData.game_id)
   }
 
   const gameRoundHandle = (roundData) => {
-    console.log('Distance: ' + roundData)
     if (roundData <= 50) setGuessedCities((c) => c + 1)
-    setScore((score) => score - roundData)
+    setDistance((distance) => distance - roundData)
     setRoundNumber((round) => (round + 1))
   }
 
   const pauseGame = () => {
-    console.log('exitGame triggered')
     setStartPopPanel(false)
     setPausePannel(true)
-    //show popup and exit to profile
-  }
-
-  const updateTopScore = () => {
-
   }
 
   const quitGame = () => {
-    console.log('quit game!')
-    console.log(profile.top_score)
-    console.log(score)
-    // updateTopScore()
     setExitGameTrigger(true)
   }
 
   const retryGame = () => {
-    console.log('Retry!')
-    cities.length === roundNumber ? finishGame(gameData.game_id,score) : deleteGame(gameData.game_id)
-    // updateTopScore()
+    cities.length === roundNumber ? finishGame(gameData.game_id, distance) : deleteGame(gameData.game_id)
+
     setGameRunning(false)
     setGameOverPanel(false)
     setGameInit(false)
     setCities([])
-    setScore(1500)
+    setDistance(1500)
     setGuessedCities(0)
     setCurrentCity({})
     setRoundNumber(0)
@@ -115,7 +106,8 @@ const Game = ({isAuth, profile, createNewGame, gameData, finishGame, deleteGame,
 
       : <div>
         <div className={`middle ${s.gameContainer}`}>
-          {currentCity && <Map city={currentCity} onRoundFinish={gameRoundHandle} currentScore={score}/>}
+          {currentCity &&
+          <Map city={currentCity} onRoundFinish={gameRoundHandle} currentScore={distance}/>}
           <button onClick={pauseGame} className={"btn btn-warning " + buttonStyle.button + ' ' + s.quitButtonDiv}>Quit
           </button>
         </div>
@@ -126,7 +118,7 @@ const Game = ({isAuth, profile, createNewGame, gameData, finishGame, deleteGame,
         {!gameOverPanel ||
         <Fragment>
           <RareMap/>
-          <PopUpPanel text={`Game is over. You guessed ${guessedCities} cities with ${score} km left!`}
+          <PopUpPanel text={`Game is over. You guessed ${guessedCities} cities with ${distance} km left!`}
                       confirmText={`Retry`} declineText={`Thank you`}
                       onSuccess={retryGame} onDecline={quitGame} wDropdown={false}/>
         </Fragment>

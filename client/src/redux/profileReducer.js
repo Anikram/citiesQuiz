@@ -1,7 +1,6 @@
 import authAPI from "../api/authAPI";
 import {toast} from "react-toastify";
 import profileAPI from "../api/profileApi";
-import {stopSubmit} from "redux-form";
 
 const initialState = {
   profile: {user_name: 'Anikram', user_id: 'sdfsdf-sdfsdf-sdfsdf-sdfsdf', user_email: 'initial@email.com', top_score: 0},
@@ -49,7 +48,6 @@ export const deleteUserToken = () => ({type: DELETE_TOKEN});
 
 export const checkUserAuthenticated = (token) => async (dispatch, getState) => {
   const response = await authAPI.isAuth(token)
-  console.log(response)
   if (response.ok) {
     dispatch(toggleAuthenticated(true));
   } else {
@@ -74,8 +72,6 @@ export const loginUser = (email, password) => async (dispatch) => {
     dispatch(setUserProfile(parsed))
     toast.success("Logged in successfully!")
   } else {
-    // const action = stopSubmit("login", {_error: parseRes || [...parseRes]})
-    // dispatch(action)
     dispatch(toggleAuthenticated(false));
 
     if (parseRes.errors) {

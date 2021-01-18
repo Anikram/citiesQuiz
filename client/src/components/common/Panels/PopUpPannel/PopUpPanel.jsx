@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import s from './PopUpPanel.module.css'
 import Button from "../../formControls/Button/Button";
-import Input from "../../formControls/Input";
 import {Dropdown, DropdownButton, FormControl, InputGroup} from "react-bootstrap";
 
 const PopUpPanel = ({wDropdown, dropdownText ,text, confirmText, declineText, onSuccess, onDecline}) => {

@@ -70,7 +70,7 @@ class App extends React.Component {
             }
             />
             <Route exact path="/profile" render={props => this.props.isAuthenticated
-              ? <Profile {...props} deleteToken={this.props.deleteToken}
+              ? <Profile {...props} deleteToken={this.props.deleteToken} isAuthenticated={this.props.isAuthenticated}
                          fetchProfile={this.props.fetchProfile} profile={this.props.profile}/>
               : <Redirect to="/login"/>
             }
