@@ -51,7 +51,7 @@ class App extends React.Component {
         <Header isAuthenticated={this.props.isAuthenticated} profile={this.props.profile} setAuth={setIsAuthenticated}
                 deleteToken={this.props.deleteToken}/>
         <div className='container-fluid p-0'>
-          <ToastContainer/>
+          <ToastContainer />
           <Switch>
             <Route exact path="/" render={
               props => <Players {...props} isAuth={this.props.isAuthenticated} users={this.props.users}

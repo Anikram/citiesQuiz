@@ -39,7 +39,7 @@ INSERT INTO games (user_id, region_id, game_finished) VALUES ('d5904e47-569e-44a
 ALTER TABLE regions DROP COLUMN region_id;
 ALTER TABLE games DROP COLUMN user_id;
 ALTER TABLE regions ADD COLUMN region_id BIGSERIAL PRIMARY KEY;
-ALTER TABLE users ADD COLUMN top_score INTEGER;
+ALTER TABLE users ADD COLUMN top_score INTEGER DEFAULT 0;
 
 ALTER TABLE regions ADD COLUMN game_id INTEGER;
 ALTER TABLE regions

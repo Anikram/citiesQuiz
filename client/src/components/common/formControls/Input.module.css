@@ -1,5 +1,5 @@
 .error input {
-    border: 2px solid crimson;
+    border: 2px solid rgb(231, 76, 60);
     display: block;
 }
 
@@ -7,9 +7,9 @@
     position: relative;
     top: -3px;
     color: aliceblue;
-    background-color: crimson;
+    background-color: rgb(231, 76, 60);
     /*border: 1px solid #282c34;*/
-    border-radius: 0.5rem 1rem 0.5rem 1rem;
+    border-radius: 0 0 0 0.5rem;
     padding: 0.4rem 1rem;
 }
 
@@ -17,7 +17,7 @@
     position: relative;
     /*top: 5rem;*/
     color: aliceblue;
-    background-color: crimson;
+    background-color: rgb(231, 76, 60);
     /*border: 1px solid #282c34;*/
     border-radius: 0.5rem 1rem 0.5rem 1rem;
     margin-top: 1rem;

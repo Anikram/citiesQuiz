@@ -20,8 +20,6 @@ router.put('/',
   async (req,res) => {
     try {
       const {top_score, user_id} = req.body;
-      console.log(top_score)
-      console.log(user_id)
       const user = await pool.query("UPDATE users SET top_score=$1 WHERE user_id=$2 RETURNING *",[top_score, user_id]);
       res.json(user.rows[0])
     } catch (err) {
