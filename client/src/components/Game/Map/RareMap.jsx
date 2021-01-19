@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import ReactMapGL from 'react-map-gl';
+require('dotenv').config()
 
 function RareMap() {
   const [viewport, setViewport] = useState({

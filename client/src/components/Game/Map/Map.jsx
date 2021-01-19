@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import s from './Map.module.css'
 import {faDotCircle} from "@fortawesome/free-regular-svg-icons";
 import {calculateDistance} from "../../../utils/helpers";
+require('dotenv').config()
 
 function Map({city, onRoundFinish, currentScore}) {
   const [choiceMade, setChoiceMade] = useState(false)
