@@ -42,7 +42,7 @@ function Map({city, onRoundFinish, currentScore}) {
     <ReactMapGL
       {...viewport}
       mapboxApiAccessToken='pk.eyJ1IjoiYW5pa3JhbSIsImEiOiJja2l3NGlqMm0zZnU0MnZxajhjd2Iwd3FvIn0.19gcJrXX7nINBiw3ttmukw'
-      mapStyle='mapbox://styles/anikram/ckiw58y2q4hhe1ap9wb16q2yh'
+      mapStyle='mapbox://styles/anikram/ckiw58y2q4hhe1ap9wb16q2yh?optimize=true'
       onClick={handleMapClick}
       getCursor={(e) => "crosshair"}
       onViewportChange={(viewport) => setViewport(viewport)}
