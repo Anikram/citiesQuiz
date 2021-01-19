@@ -36,10 +36,6 @@ function Map({city, onRoundFinish, currentScore}) {
       }, 2750)
   }
 
-  useEffect(() => {
-    console.log('render')
-  }, [city, currentScore,choiceMade])
-
   return (
     <ReactMapGL
       {...viewport}
