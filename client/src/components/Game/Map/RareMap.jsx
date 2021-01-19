@@ -13,8 +13,8 @@ function RareMap() {
   return (
     <ReactMapGL
       {...viewport}
-      mapboxApiAccessToken='pk.eyJ1IjoiYW5pa3JhbSIsImEiOiJja2l3NHJyOWIzZXhlMnlsYnZxMjFwc2V2In0.bbOgwP1diRO6BiV2guyPwA'
-      mapStyle='mapbox://styles/anikram/ckiw58y2q4hhe1ap9wb16q2yh?optimize=true'
+      mapboxApiAccessToken={process.env.NODE_ENV === 'production' ? process.env.MAP_TOKEN : process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+      mapStyle={process.env.NODE_ENV === 'production' ? process.env.MAP_STYLE : process.env.REACT_APP_MAP_STYLE}
     >
 
     </ReactMapGL>
