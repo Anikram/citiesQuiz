@@ -8,7 +8,7 @@ function RareMap() {
     longitude: 11.5761,
     zoom: 1,
     width: "100%",
-    height: "80vh"
+    height: "85vh"
   });
 
   return (
