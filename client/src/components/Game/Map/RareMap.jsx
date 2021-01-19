@@ -14,8 +14,8 @@ function RareMap() {
   return (
     <ReactMapGL
       {...viewport}
-      mapboxApiAccessToken={process.env.NODE_ENV === 'production' ? process.env.MAP_TOKEN : process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-      mapStyle={process.env.NODE_ENV === 'production' ? process.env.MAP_STYLE : process.env.REACT_APP_MAP_STYLE}
+      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+      mapStyle={process.env.REACT_APP_MAP_STYLE}
     >
 
     </ReactMapGL>

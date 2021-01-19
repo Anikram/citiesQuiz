@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, {Fragment} from 'react';
+import React from 'react';
 import Header from "./components/Layout/Header";
 import Footer from "./components/Layout/Footer";
 import {BrowserRouter as Router, Route, withRouter, Redirect, Switch} from "react-router-dom";
