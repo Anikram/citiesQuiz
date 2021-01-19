@@ -41,7 +41,7 @@ function Map({city, onRoundFinish, currentScore}) {
   return (
     <ReactMapGL
       {...viewport}
-      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+      mapboxApiAccessToken={process.env.NODE_ENV === "production" ? process.env.MAP_ACCESS_TOKEN : process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
       mapStyle='mapbox://styles/anikram/ckiw58y2q4hhe1ap9wb16q2yh'
       onClick={handleMapClick}
       getCursor={(e) => "crosshair"}
