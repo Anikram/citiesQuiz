@@ -51,7 +51,9 @@ const Game = ({isAuth, profile, createNewGame, gameData, finishGame, deleteGame,
   const initGame = (value) => {
     if (!isAuth) setExitGameTrigger(true)
 
-    createNewGame(profile.user_id, value.toLowerCase())
+    createNewGame(profile.user_id, value.toLowerCase()).catch(err => {
+      console.err(err)
+    })
     if (gameInit) setGameRunning(true)
 
   }

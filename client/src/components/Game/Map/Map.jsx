@@ -12,6 +12,7 @@ function Map({city, onRoundFinish, currentScore}) {
   const [choiceMade, setChoiceMade] = useState(false)
   const [guessPosition, setGuessPosition] = useState({});
   const [successDistance, setSuccessDistance] = useState(0);
+  const [transitionDuration, setTransitionDuration] = useState(100);
 
   const [viewport, setViewport] = useState({
     latitude: 48.1599,
@@ -21,10 +22,18 @@ function Map({city, onRoundFinish, currentScore}) {
     height: "85vh"
   });
 
+  const distanceCheck = (distance) => {
+    return distance <= 50
+  }
+
   const handleMapClick = ({lngLat: [longitude, latitude]}) => {
     setGuessPosition({longitude, latitude})
 
     setChoiceMade(true)
+    setTransitionDuration(1000)
+    setTimeout(() => {
+      setTransitionDuration(100)
+    }, 3000)
     setViewport({
       latitude: city.lat,
       longitude: city.long,
@@ -33,7 +42,7 @@ function Map({city, onRoundFinish, currentScore}) {
       height: "85vh"
     })
     const distance = calculateDistance(latitude, longitude, city.lat, city.long)
-    if (distance <= 50) {
+    if (distanceCheck(distance)) {
       setSuccessDistance(distance)
     }
 
@@ -51,7 +60,7 @@ function Map({city, onRoundFinish, currentScore}) {
       longitude: 11.5761,
       zoom: 3,
       width: "100%",
-      height: "100%"
+      height: "85vh"
     })
   }, [city])
 
@@ -63,7 +72,7 @@ function Map({city, onRoundFinish, currentScore}) {
       onClick={handleMapClick}
       getCursor={(e) => "crosshair"}
       onViewportChange={(viewport) => setViewport(viewport)}
-      transitionDuration={1000}
+      transitionDuration={transitionDuration}
       transitionInterpolator={new FlyToInterpolator()}
     >
 
@@ -82,11 +91,14 @@ function Map({city, onRoundFinish, currentScore}) {
           {
             choiceMade &&
             <Fragment>
-              <Marker latitude={city.lat} longitude={city.long} offsetLeft={-10} offsetTop={-12}>
-                <div><FontAwesomeIcon
-                  icon={faDotCircle}/></div>
-              </Marker>
 
+                <Marker latitude={city.lat} longitude={city.long} offsetLeft={-10} offsetTop={-12}>
+                  <div className={successDistance ? s.successColor : s.cityColor}>
+                  <FontAwesomeIcon
+                    icon={faDotCircle}/>
+                  </div>
+
+                </Marker>
 
             </Fragment>
 
