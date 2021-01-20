@@ -38,6 +38,16 @@ It serves data for the client from Postgres database via json.
 * express-validator
 * jsonwebtoken
 * pg 8.5.1
+
+## Tested on
+App works correctly in browsers on PC and Mobile devices:
+* Firefox  84.0.2 (64-bit)
+* Chrome 87.0.4280.141 (x86_64) (Mobile version doesn't show a map (Xiaomi MiMix 2S))
+* Safari 13.1 (14609.1.20.111.8)
+* Xiaomi browser V12.7.5-go
+
+## Known problems
+App crashes on all pages except root page `/` after jwt token expires (1 hour) 
   
 
 ### remarks
