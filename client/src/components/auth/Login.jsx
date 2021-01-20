@@ -10,7 +10,7 @@ const Login = ({loginUser}) => {
     }
 
   }
-  return <div className='middle'>
+  return <div>
     <h1 className="text-center py-5">Login</h1>
     <LoginForm onSubmit={onSubmitForm}/>
   </div>;

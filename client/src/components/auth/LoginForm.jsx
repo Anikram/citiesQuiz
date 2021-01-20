@@ -12,7 +12,7 @@ const minLength5 = minLengthCreator(5);
 const LoginForm = (props) => {
 
   return (
-    <form onSubmit={props.handleSubmit} className='col-4'>
+    <form onSubmit={props.handleSubmit} className={formStyle.formStyle}>
       <div>
         <Field name={"email"} type={"text"} placeholder={"email"} component={Input}
                validate={[required,maxLength30,minLength5]}/>

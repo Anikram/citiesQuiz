@@ -12,7 +12,7 @@ const Register = ({registerUser}) => {
     }
   }
 
-  return <div className='middle'>
+  return <div>
     <h1 className="text-center py-5">Register</h1>
     <RegisterReduxForm onSubmit={onSubmitForm}/>
   </div>;

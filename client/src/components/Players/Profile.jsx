@@ -23,19 +23,25 @@ const Profile = ({isAuthenticated, fetchProfile, profile, games, getGames}) => {
   return isAuthenticated ? <div className={s.playersContainer}>
       <div className={s.profileContainer}>
         <h1>Greetings, {profile.user_name}! </h1>
-        <h2>Your best score is <span className={s.scoreSpan}>{profile.top_score}</span>cities so far!
-        </h2>
-        <h3>Do you want to improve it?</h3>
+        {games.length
+          ? <><h2>Your best score is <span className={s.scoreSpan}>{profile.top_score}</span>cities so far!</h2>
+            <h3>Do you want to improve it?</h3></>
+          : <><h2>Yoo haven't played yet? It's worth trying! ;-)</h2> <h2>Click New game to start.</h2></>}
+
         <Link to='/game'>
           <button className={sBtn.button + ' btn btn-info my-3'}>New game</button>
         </Link>
-        <hr/>
-        <div>
+
+        {games.length ? <div>
+          <hr/>
           <h3>Recent games:</h3>
           {games.map((g, i) => (
-            <div className={s.gamePanel} key={i}>Cities guessed: <span>{g.score}</span> with <span>{g.distance}</span> km
+            <div className={s.gamePanel} key={i}>Cities
+              guessed: <span>{g.score}</span> with <span>{g.distance}</span> km
               left! Played: {formatDate(g.created_at)} </div>))}
-        </div>
+        </div> : <div>
+
+        </div>}
       </div>
 
 

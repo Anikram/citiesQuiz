@@ -8,7 +8,7 @@ const Input = ({input, meta, ...props}) => {
   return (
     <div>
       <div className={hasError && s.error}>
-        <input {...input} {...props} className={"form-control mt-4"}/>
+        <input {...input} {...props} className={"form-control " + s.input}/>
         { hasError && <span>{meta.error}</span>}
       </div>
     </div>
