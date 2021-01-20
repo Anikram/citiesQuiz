@@ -146,7 +146,7 @@ const Game = ({isAuth, profile, createNewGame, gameData, finishGame, deleteGame,
           ? <Fragment>
             <RareMap/>
             <PopUpPanel text={`You win! You guessed ${guessedCities} cities with ${distance} km left!`}
-                        confirmText={`Retry`} declineText={`Thank you`}
+                        confirmText={`Retry`} declineText={`Thanks`}
                         onSuccess={retryGame} onDecline={quitGame} wDropdown={false} style={winStyle}/>
 
           </Fragment>
