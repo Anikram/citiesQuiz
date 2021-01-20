@@ -20,10 +20,10 @@ It serves data for the client from Postgres database via json.
 5. Go to http://localhost:3000/
 6. Have fun! =)
 
-##Technologies and packages
+## Technologies and packages
 * yarn v 1.22.10
 * dotenv
-###client side
+### client side
 * react v17.0.1
 * redux 
 * react-bootstrap
@@ -31,7 +31,7 @@ It serves data for the client from Postgres database via json.
 * react-toastify
 * redux-form
 * redux-thunk
-###server side
+### server side
 * node v15.4.0
 * bcrypt 
 * express
