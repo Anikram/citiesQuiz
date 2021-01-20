@@ -17,3 +17,14 @@
     /*border-radius: 1rem;*/
 
 }
+.win {
+    background-color: forestgreen;
+    font-weight: bold;
+    color: aliceblue;
+}
+
+.lose {
+    background-color: crimson;
+    font-weight: bold;
+    color: aliceblue;
+}

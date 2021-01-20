@@ -15,6 +15,20 @@
     border: 2px solid #282c34;
 }
 
+.gameResultW {
+    font-weight: bold;
+    margin: 0 1rem;
+    display: inline;
+    color: #20c620;
+}
+
+.gameResultL {
+    color: crimson;
+    margin: 0 1rem;
+    display: inline;
+    font-weight: bold;
+}
+
 .playersPanel {
     width: 50%;
     margin: auto;
@@ -38,7 +52,7 @@
     margin: 0.2rem;
     color: black;
     border-radius: 0.5rem;
-    width: 60%;
+    width: 100%;
 }
 
 .gamePanel span {

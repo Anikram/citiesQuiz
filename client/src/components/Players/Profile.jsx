@@ -34,11 +34,14 @@ const Profile = ({isAuthenticated, fetchProfile, profile, games, getGames}) => {
 
         {games.length ? <div>
           <hr/>
+          <hr/>
           <h3>Recent games:</h3>
           {games.map((g, i) => (
-            <div className={s.gamePanel} key={i}>Cities
-              guessed: <span>{g.score}</span> with <span>{g.distance}</span> km
-              left! Played: {formatDate(g.created_at)} </div>))}
+            <div className={s.gamePanel} key={i}>
+              <div className={g.win ? s.gameResultW : s.gameResultL}>{g.win ? 'W' : 'L'}</div>
+              Cities guessed: <span>{g.score}</span> with <span>{g.distance}</span> km
+              left! Played: {formatDate(g.created_at)}
+              <hr/></div>))}
         </div> : <div>
 
         </div>}

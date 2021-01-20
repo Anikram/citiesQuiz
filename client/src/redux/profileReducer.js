@@ -62,6 +62,9 @@ export const checkUserAuthenticated = (token) => async (dispatch, getState) => {
   const decodedToken = jwt.decode(token, {complete: true});
   const dateNow = new Date();
 
+  if (!decodedToken) {dispatch(toggleAuthenticated(false));
+  return}
+
   if (!token && decodedToken.exp < dateNow.getTime()) {
     dispatch(toggleAuthenticated(false));
     console.log('checking jwt expiration')

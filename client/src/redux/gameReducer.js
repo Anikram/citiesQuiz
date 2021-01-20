@@ -70,9 +70,9 @@ export const createNewGame = (user_id, region_name) => async (dispatch, getState
   dispatch(loadGameData(parseRes,citiesWithNewProp))
 }
 
-export const finishGame = (game_id,score,distance) => async (dispatch,getState) => {
+export const finishGame = (game_id,score,distance,win) => async (dispatch,getState) => {
   const token = getState().profile.token;
-  await gameAPI.finishGame(game_id,token,score,distance);
+  await gameAPI.finishGame(game_id,token,score,distance,win);
   dispatch(finishCurrentGame())
 
 }

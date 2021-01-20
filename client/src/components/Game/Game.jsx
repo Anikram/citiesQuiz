@@ -6,12 +6,25 @@ import {Redirect} from "react-router-dom";
 import buttonStyle from "../common/formControls/Button/Button.module.css";
 import RareMap from "./Map/RareMap";
 
-const Game = ({isAuth, profile, createNewGame, gameData, finishGame, deleteGame, setTopScore,flushGameData}) => {
+const winStyle = {
+  background: 'forestgreen',
+'font-weight': 'bold',
+color: 'aliceblue'
+}
+
+const loseStyle = {
+  background: 'crimson',
+  'font-weight': 'bold',
+  color: 'aliceblue'
+}
+
+const Game = ({isAuth, profile, createNewGame, gameData, finishGame, deleteGame, setTopScore, flushGameData}) => {
   const [exitGameTrigger, setExitGameTrigger] = useState(false) //trigger end game redirect
   const [gameRunning, setGameRunning] = useState(false); //game in progress?
   const [gameInit, setGameInit] = useState(false); //game is init?
   const [roundNumber, setRoundNumber] = useState(0); //current round
   const [cities, setCities] = useState([]);//cities array from api
+  const [win, setWin] = useState(false);
 
   const [guessedCities, setGuessedCities] = useState(0); // number of guessed cities
   const [currentCity, setCurrentCity] = useState({}); // current city for render a map
@@ -29,15 +42,21 @@ const Game = ({isAuth, profile, createNewGame, gameData, finishGame, deleteGame,
     if (currentCity) setGameInit(true)
 
     //end game conditions
-    if (gameRunning) {
+    if (gameInit && gameRunning) {
       if (distance <= 0) setDistance(0)
-      if (distance <= 0 || ((cities.length === roundNumber) && roundNumber !== 0)) {
+
+      if (distance > 0 && cities.length === roundNumber && roundNumber !== 0) {
+        if ((cities.length === roundNumber) && roundNumber !== 0) {
+          if (profile.top_score < guessedCities) {
+            setTopScore(profile.user_id, guessedCities)
+          }
+        }
+        setWin(true)
         setGameOverPanel(true)
       }
-      if ((cities.length === roundNumber) && roundNumber !== 0) {
-        if (profile.top_score < guessedCities) {
-          setTopScore(profile.user_id, guessedCities)
-        }
+
+      if (distance <= 0 && roundNumber !== 0) {
+        setGameOverPanel(true)
       }
     }
 
@@ -70,7 +89,7 @@ const Game = ({isAuth, profile, createNewGame, gameData, finishGame, deleteGame,
   }
 
   const handleGameFinish = () => {
-    return cities.length === roundNumber ? finishGame(gameData.game_id, guessedCities, distance) : deleteGame(gameData.game_id)
+    return finishGame(gameData.game_id, guessedCities, distance,win)
   }
 
   const quitGame = () => {
@@ -79,7 +98,7 @@ const Game = ({isAuth, profile, createNewGame, gameData, finishGame, deleteGame,
   }
 
   const retryGame = () => {
-    finishGame(gameData.game_id, guessedCities, distance)
+    finishGame(gameData.game_id, guessedCities, distance,win)
     flushGameData()
     setGameRunning(false)
     setGameOverPanel(false)
@@ -107,7 +126,7 @@ const Game = ({isAuth, profile, createNewGame, gameData, finishGame, deleteGame,
       ? <Fragment>
         <RareMap/>
         <PopUpPanel text={`Pick a region you want to play at:`} confirmText={`Start`} declineText={`Cancel`}
-                    onSuccess={initGame} onDecline={quitGame} wDropdown={true} dropdownText={'Regions'}/>
+                    onSuccess={initGame} onDecline={quitGame} wDropdown={true} dropdownText={'Regions'} />
 
       </Fragment>
 
@@ -123,12 +142,20 @@ const Game = ({isAuth, profile, createNewGame, gameData, finishGame, deleteGame,
                                      onSuccess={quitGame} onDecline={continueGame}/>
         }
         {!gameOverPanel ||
-        <Fragment>
-          <RareMap/>
-          <PopUpPanel text={`Game is over. You guessed ${guessedCities} cities with ${distance} km left!`}
-                      confirmText={`Retry`} declineText={`Thank you`}
-                      onSuccess={retryGame} onDecline={quitGame} wDropdown={false}/>
-        </Fragment>
+        (win
+          ? <Fragment>
+            <RareMap/>
+            <PopUpPanel text={`You win! You guessed ${guessedCities} cities with ${distance} km left!`}
+                        confirmText={`Retry`} declineText={`Thank you`}
+                        onSuccess={retryGame} onDecline={quitGame} wDropdown={false} style={winStyle}/>
+
+          </Fragment>
+          : <Fragment>
+            <RareMap/>
+            <PopUpPanel text={`You have lost. You guessed ${guessedCities} cities with ${distance} km left!`}
+                        confirmText={`Retry`} declineText={`Thank you`}
+                        onSuccess={retryGame} onDecline={quitGame} wDropdown={false} style={loseStyle} />
+          </Fragment>)
 
         }
       </div>

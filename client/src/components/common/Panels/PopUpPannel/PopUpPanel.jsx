@@ -3,12 +3,12 @@ import s from './PopUpPanel.module.css'
 import Button from "../../formControls/Button/Button";
 import {Dropdown, DropdownButton, FormControl, InputGroup} from "react-bootstrap";
 
-const PopUpPanel = ({wDropdown, dropdownText ,text, confirmText, declineText, onSuccess, onDecline}) => {
+const PopUpPanel = ({wDropdown, dropdownText ,text, confirmText, declineText, onSuccess, onDecline, style={}}) => {
   const [region, setRegion] = useState('Europe');
 
   return (
     <div className={s.backInBlack}>
-      <div className={s.panelContainer}>
+      <div className={s.panelContainer} style={style}>
         <div className={s.textSection}>
           <p>{text || 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet dolor illo iusto pariatur recusandae voluptatum!'}</p>
         </div>

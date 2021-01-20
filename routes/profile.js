@@ -36,7 +36,7 @@ router.get('/games',
     try {
       // console.log('-------GET /games')
       //req.user is a payload (../middleware/authorization.js)
-      const games = await pool.query("SELECT * FROM games WHERE user_id = $1 AND game_finished=TRUE LIMIT 10",[req.user])
+      const games = await pool.query("SELECT * FROM games WHERE user_id = $1 AND game_finished=TRUE ORDER BY created_at DESC LIMIT 10",[req.user])
       res.json(games.rows)
     } catch (err) {
       console.error(err.message)
@@ -71,8 +71,8 @@ router.post('/game',authorization, async (req,res) => {
 router.put('/game', authorization, async (req, res) => {
   try {
     // console.log('------- PUT /game - finish')
-    const {game_id, score, distance} = req.body;
-    const response = await pool.query("UPDATE games SET game_finished=$1, score=$2, distance=$3 WHERE game_id=$4 RETURNING *",[true,score,distance,game_id])
+    const {game_id, score, distance, win} = req.body;
+    const response = await pool.query("UPDATE games SET game_finished=$1, score=$2, distance=$3, win=$4 WHERE game_id=$5 RETURNING *",[true,score,distance,win,game_id])
     res.json(response.rows[0])
   } catch (err) {
     console.error(err.message)

@@ -89,3 +89,4 @@ VALUES ('europe', '[{
 ALTER TABLE games ADD COLUMN distance INTEGER;
 ALTER TABLE games ADD COLUMN created_at TIMESTAMP;
 ALTER TABLE games ALTER COLUMN created_at SET DEFAULT now();
+ALTER TABLE games ADD COLUMN win BOOL DEFAULT false;
