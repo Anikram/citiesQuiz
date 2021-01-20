@@ -45,6 +45,7 @@ App works correctly in browsers on PC and Mobile devices:
 * Chrome 87.0.4280.141 (x86_64) (Mobile version doesn't show a map (Xiaomi MiMix 2S))
 * Safari 13.1 (14609.1.20.111.8)
 * Xiaomi browser V12.7.5-go
+* Opera 73.0.3856.344
 
 ## Known problems
 App crashes on all pages except root page `/` after jwt token expires (1 hour) 
