@@ -32,8 +32,7 @@
 .successDiv {
     position: relative;
     top: 20%;
-    left: 50%;
-    transform: translate(-30%, -50%);
+    left: 45%;
     display: block;
     width: 10rem;
     height: 10rem;
@@ -41,10 +40,25 @@
     background-color: rgba(173, 255, 47, 0.5);
     color: forestgreen;
     font-size: 5rem;
-    padding: 0 0 1.5rem 2rem;
-    -webkit-transition-duration: 2s;
-    -webkit-transition-property: all;
-    -webkit-transition-timing-function: ease-in-out;
+    animation: grow 1.5s infinite ease-in-out;
+    text-align: center;
+}
+
+.successDiv svg {
+    position:relative;
+    top: 10%;
+}
+
+@keyframes grow {
+    0% {
+        transform: scale(0.6);
+    }
+    50% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0.6);
+    }
 }
 
 

@@ -2,6 +2,18 @@
     padding: 2rem 5rem;
 }
 
+.profileContainer {
+    padding: 2rem 5rem;
+    margin: 1rem auto;
+    width: 80%;
+    min-height: 10rem;
+    height: auto;
+    background-color: white;
+    border-radius: 2rem;
+    /*padding: 1rem 3rem;*/
+    border: 2px solid #282c34;
+}
+
 .playersPanel {
     width: 50%;
     margin: auto;
@@ -19,6 +31,19 @@
     margin: 1rem auto;
     text-align: center;
     letter-spacing: 0.3rem;
+}
+.gamePanel {
+    display: block;
+    padding: 0.3rem;
+    margin: 0.2rem;
+    color: black;
+    border-radius: 0.5rem;
+    width: 60%;
+}
+
+.gamePanel span {
+    color: crimson;
+    font-weight: bold;
 }
 
 .playersText h1 {

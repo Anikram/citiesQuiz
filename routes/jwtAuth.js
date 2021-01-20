@@ -12,6 +12,7 @@ router.post('/register',
   body('password').isLength({ min: 5 }),
   async (req, res) => {
   try {
+    // console.log('------- POST /register')
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -49,6 +50,7 @@ router.post('/login',
   body('password').isLength({ min: 5 }),
   async (req,res) => {
   try {
+    // console.log('-------POST /login')
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -76,6 +78,7 @@ router.post('/login',
 
 router.get('/is-verify', authorization, async (req,res) => {
   try {
+    // console.log('-------GET /is-verify')
     res.json(true)
   } catch (err) {
     console.error(err.message)

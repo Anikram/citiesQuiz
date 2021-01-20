@@ -29,3 +29,9 @@ export const calculateDistance = (p1lat, p1long, p2lat, p2long) => {
 
   return Math.round(distance)
 }
+
+export const formatDate = (dateString) => {
+  const months = ['Jan', 'Feb', 'Mar', "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct","Nov", "Dec"]
+  const result = new Date(dateString)
+  return `${result.getDate()} ${months[result.getUTCMonth()]} ${result.getFullYear()}, ${result.getHours()}:${result.getMinutes()}`
+}

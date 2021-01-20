@@ -3,6 +3,7 @@ import gameAPI from "../api/gameAPI";
 const LOAD_GAME_DATA = "LOAD-GAME-DATA";
 const FINISH_CURRENT_GAME = "FINISH-CURRENT-GAME";
 const CLEAR_GAME_DATA = "CLEAR-GAME-DATA";
+const FLUSH_GAME = '/profile/FLUSH-GAME';
 
 const initialState = {
   game_id: '',
@@ -24,6 +25,14 @@ const gameReducer = (state = initialState, action) => {
         ...state,
         game_finished: true
       }
+    case FLUSH_GAME:
+      return {
+        ...state,
+        game_id: null,
+        game_finished: null,
+        score: null,
+        cities:[]
+      }
     case CLEAR_GAME_DATA:
       return {
         ...state,
@@ -41,6 +50,7 @@ const gameReducer = (state = initialState, action) => {
 export const finishCurrentGame = () => ({type: FINISH_CURRENT_GAME});
 export const clearGameData = () => ({type: CLEAR_GAME_DATA});
 export const loadGameData = (gameData,cities) => ({type: LOAD_GAME_DATA, gameData, cities});
+export const flushGame = () => ({type: FLUSH_GAME});
 
 export const fetchGameData = (game_id) => async (dispatch, getState) => {
   const token = getState().profile.token;
@@ -60,12 +70,18 @@ export const createNewGame = (user_id, region_name) => async (dispatch, getState
   dispatch(loadGameData(parseRes,citiesWithNewProp))
 }
 
-export const finishGame = (game_id,score) => async (dispatch,getState) => {
+export const finishGame = (game_id,score,distance) => async (dispatch,getState) => {
   const token = getState().profile.token;
-  await gameAPI.finishGame(game_id,token,score);
+  await gameAPI.finishGame(game_id,token,score,distance);
   dispatch(finishCurrentGame())
 
 }
+
+export const flushGameData = () => (dispatch) => {
+  dispatch(flushGame())
+}
+
+
 
 export const deleteGame = (game_id) => async (dispatch,getState) => {
   const token = getState().profile.token;

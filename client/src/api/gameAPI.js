@@ -1,6 +1,6 @@
 const gameAPI = {
   fetchGame(body, token) {
-    return fetch('http://localhost:5000/profile/game', {
+    return fetch('/api/profile/game', {
       method: "GET",
       headers: {token: token, game_id: body}
     })
@@ -16,8 +16,8 @@ const gameAPI = {
     })
   },
 
-  finishGame(game_id, token, score) {
-    const data = {game_id, token, score};
+  finishGame(game_id, token, score,distance) {
+    const data = {game_id, token, score,distance};
     const body = JSON.stringify(data)
     return fetch('/api/profile/game', {
       method: "PUT",
@@ -33,6 +33,13 @@ const gameAPI = {
       method: "DELETE",
       headers: {"Content-Type": "application/json"},
       body: body
+    })
+  },
+
+  getGames(token, user_id) {
+    return fetch('/api/profile/games', {
+      method: "GET",
+      headers: {token: token, user_id: user_id}
     })
   }
 }

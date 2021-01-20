@@ -6,7 +6,7 @@ import {Redirect} from "react-router-dom";
 import buttonStyle from "../common/formControls/Button/Button.module.css";
 import RareMap from "./Map/RareMap";
 
-const Game = ({isAuth, profile, createNewGame, gameData, finishGame, deleteGame, setTopScore}) => {
+const Game = ({isAuth, profile, createNewGame, gameData, finishGame, deleteGame, setTopScore,flushGameData}) => {
   const [exitGameTrigger, setExitGameTrigger] = useState(false) //trigger end game redirect
   const [gameRunning, setGameRunning] = useState(false); //game in progress?
   const [gameInit, setGameInit] = useState(false); //game is init?
@@ -68,7 +68,7 @@ const Game = ({isAuth, profile, createNewGame, gameData, finishGame, deleteGame,
   }
 
   const handleGameFinish = () => {
-    return cities.length === roundNumber ? finishGame(gameData.game_id, guessedCities) : deleteGame(gameData.game_id)
+    return cities.length === roundNumber ? finishGame(gameData.game_id, guessedCities, distance) : deleteGame(gameData.game_id)
   }
 
   const quitGame = () => {
@@ -77,7 +77,8 @@ const Game = ({isAuth, profile, createNewGame, gameData, finishGame, deleteGame,
   }
 
   const retryGame = () => {
-    handleGameFinish()
+    finishGame(gameData.game_id, guessedCities, distance)
+    flushGameData()
     setGameRunning(false)
     setGameOverPanel(false)
     setGameInit(false)

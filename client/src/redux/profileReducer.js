@@ -1,17 +1,22 @@
 import authAPI from "../api/authAPI";
 import {toast} from "react-toastify";
 import profileAPI from "../api/profileApi";
+import gameAPI from "../api/gameAPI";
+const jwt = require('jsonwebtoken');
 
 const initialState = {
   profile: {user_name: 'Anikram', user_id: 'sdfsdf-sdfsdf-sdfsdf-sdfsdf', user_email: 'initial@email.com', top_score: 0},
   token: '',
-  isAuthenticated: false
+  isAuthenticated: false,
+  games: []
 }
 
 const SET_PROFILE = '/profile/SET-USER-PROFILE';
 const SET_TOKEN = '/profile/SET-USER-TOKEN';
 const TOGGLE_IS_AUTH = '/profile/TOGGLE-IS-AUTH';
 const DELETE_TOKEN = '/profile/DELETE-USER-TOKEN';
+const GET_USER_GAMES = '/profile/GET-USER-GAMES';
+
 
 const profileReducer = (state = initialState, action) => {
   switch(action.type) {
@@ -35,6 +40,11 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         token: ''
       }
+    case GET_USER_GAMES:
+      return {
+        ...state,
+        games: action.games
+      }
     default:
       return state
   }
@@ -44,18 +54,39 @@ export const setUserProfile = (profileData) => ({type: SET_PROFILE, profileData}
 export const toggleAuthenticated = (bool) => ({type: TOGGLE_IS_AUTH, bool})
 export const setUserToken = (token) => ({type: SET_TOKEN, token});
 export const deleteUserToken = () => ({type: DELETE_TOKEN});
+export const getUserGames = (games) => ({type: GET_USER_GAMES, games});
+
 
 
 export const checkUserAuthenticated = (token) => async (dispatch, getState) => {
-  const response = await authAPI.isAuth(token)
-  if (response.ok) {
-    dispatch(toggleAuthenticated(true));
-  } else {
+  const decodedToken = jwt.decode(token, {complete: true});
+  const dateNow = new Date();
+
+  if (!token && decodedToken.exp < dateNow.getTime()) {
     dispatch(toggleAuthenticated(false));
+    console.log('checking jwt expiration')
+  } else {
+    const response = await authAPI.isAuth(token)
+    if (response.ok) {
+      dispatch(toggleAuthenticated(true));
+    } else {
+      dispatch(toggleAuthenticated(false));
+    }
   }
 }
 
-export const setIsAuthenticated = (bool) => async (dispatch, getState) => {
+export const getGames = (user_id) => async (dispatch, getState) => {
+  const token = getState().profile.token;
+  const response = await gameAPI.getGames(token,user_id);
+  const parseRes = await response.json();
+  if (parseRes.error) {
+    console.error(parseRes.error)
+  } else {
+    dispatch(getUserGames(parseRes));
+  }
+}
+
+export const setIsAuthenticated = (bool) => async (dispatch) => {
   dispatch(toggleAuthenticated(bool))
 }
 
@@ -91,7 +122,7 @@ export const setTopScore = (user_id, top_score) => async (dispatch, getState) =>
   if (parseRes.errors) {
     toast.error(parseRes)
   } else {
-    setUserProfile(parseRes)
+    dispatch(setUserProfile(parseRes))
   }
 }
 
@@ -102,6 +133,7 @@ export const setToken = (token) => async (dispatch, getState) => {
 export const fetchProfile = (token) => async (dispatch) => {
   const response = await profileAPI.fetchUserProfile(token)
   const parseRes = await response.json();
+
   if (parseRes.token !== '') {
     dispatch(setUserProfile(parseRes))
   } else {

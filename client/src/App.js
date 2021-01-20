@@ -17,7 +17,7 @@ import {connect, Provider} from "react-redux";
 import {
   checkUserAuthenticated,
   deleteToken,
-  fetchProfile,
+  fetchProfile, getGames,
   loginUser, registerUser,
   setIsAuthenticated,
   setToken, setTopScore
@@ -25,7 +25,7 @@ import {
 import {initializeApp} from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import {fetchTopUsers} from "./redux/usersReducer";
-import {createNewGame, deleteGame, fetchGameData, finishGame} from "./redux/gameReducer";
+import {createNewGame, deleteGame, fetchGameData, finishGame, flushGameData} from "./redux/gameReducer";
 
 require('dotenv').config()
 
@@ -51,7 +51,7 @@ class App extends React.Component {
         <Header isAuthenticated={this.props.isAuthenticated} profile={this.props.profile} setAuth={setIsAuthenticated}
                 deleteToken={this.props.deleteToken}/>
         <div className='middle'>
-          <ToastContainer />
+          <ToastContainer/>
           <Switch>
             <Route exact path="/" render={
               props => <Players {...props} isAuth={this.props.isAuthenticated} users={this.props.users}
@@ -71,20 +71,26 @@ class App extends React.Component {
             />
             <Route exact path="/profile" render={props => this.props.isAuthenticated
               ? <Profile {...props} deleteToken={this.props.deleteToken} isAuthenticated={this.props.isAuthenticated}
-                         fetchProfile={this.props.fetchProfile} profile={this.props.profile}/>
+                         fetchProfile={this.props.fetchProfile} profile={this.props.profile} games={this.props.games}
+                         getGames={this.props.getGames} fetchGameData={this.props.fetchGameData}
+                         createNewGame={this.props.createNewGame} gameData={this.props.gameData}
+                         deleteGame={this.props.deleteGame} finishGame={this.props.finishGame}
+                         flushGameData={this.props.flushGameData}/>
               : <Redirect to="/login"/>
             }
             />
             <Route exact path='/game' render={props => this.props.isAuthenticated
               ? <Game fetchGameData={this.props.fetchGameData} profile={this.props.profile}
                       createNewGame={this.props.createNewGame} gameData={this.props.gameData}
-              deleteGame={this.props.deleteGame} finishGame={this.props.finishGame} isAuth={this.props.isAuthenticated} setTopScore={this.props.setTopScore}/>
+                      deleteGame={this.props.deleteGame} finishGame={this.props.finishGame}
+                      flushGameData={this.props.flushGameData} isAuth={this.props.isAuthenticated}
+                      setTopScore={this.props.setTopScore}/>
               : <Redirect to="/login"/>
 
             }/>
           </Switch>
         </div>
-        <Footer />
+        <Footer/>
       </div>
     )
   }
@@ -97,7 +103,8 @@ const mapStateToProps = (state) => {
     initialized: state.app.initialized,
     profile: state.profile.profile,
     users: state.users.users,
-    gameData: state.games
+    gameData: state.games,
+    games: state.profile.games
   }
 }
 
@@ -117,7 +124,9 @@ const AppContainer = compose(
     registerUser,
     finishGame,
     deleteGame,
-    setTopScore
+    setTopScore,
+    getGames,
+    flushGameData
   }))(App);
 
 

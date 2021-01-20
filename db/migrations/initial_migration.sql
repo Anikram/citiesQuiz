@@ -84,3 +84,8 @@ VALUES ('europe', '[{
     "long": 16.363449
   }
 ]');
+
+--migrate
+ALTER TABLE games ADD COLUMN distance INTEGER;
+ALTER TABLE games ADD COLUMN created_at TIMESTAMP;
+ALTER TABLE games ALTER COLUMN created_at SET DEFAULT now();

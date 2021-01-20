@@ -1,11 +1,12 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import ReactMapGL, {Marker} from 'react-map-gl';
-import {faCrown,faCheck} from "@fortawesome/free-solid-svg-icons";
+import ReactMapGL, {FlyToInterpolator, Marker} from 'react-map-gl';
+import {faCrown, faCheck} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import s from './Map.module.css'
 import {faDotCircle} from "@fortawesome/free-regular-svg-icons";
 import {calculateDistance} from "../../../utils/helpers";
-require('dotenv').config()
+
+require('dotenv').config();
 
 function Map({city, onRoundFinish, currentScore}) {
   const [choiceMade, setChoiceMade] = useState(false)
@@ -22,19 +23,37 @@ function Map({city, onRoundFinish, currentScore}) {
 
   const handleMapClick = ({lngLat: [longitude, latitude]}) => {
     setGuessPosition({longitude, latitude})
+
     setChoiceMade(true)
+    setViewport({
+      latitude: city.lat,
+      longitude: city.long,
+      zoom: 5,
+      width: "100%",
+      height: "85vh"
+    })
     const distance = calculateDistance(latitude, longitude, city.lat, city.long)
     if (distance <= 50) {
       setSuccessDistance(distance)
     }
 
-      setTimeout(() => {
-        onRoundFinish(distance)
-        setGuessPosition({})
-        setChoiceMade(false)
-        setSuccessDistance(0)
-      }, 2750)
+    setTimeout(() => {
+      onRoundFinish(distance)
+      setGuessPosition({})
+      setChoiceMade(false)
+      setSuccessDistance(0)
+    }, 2750)
   }
+
+  useEffect(() => {
+    setViewport({
+      latitude: 48.1599,
+      longitude: 11.5761,
+      zoom: 3,
+      width: "100%",
+      height: "100%"
+    })
+  }, [city])
 
   return (
     <ReactMapGL
@@ -44,6 +63,8 @@ function Map({city, onRoundFinish, currentScore}) {
       onClick={handleMapClick}
       getCursor={(e) => "crosshair"}
       onViewportChange={(viewport) => setViewport(viewport)}
+      transitionDuration={1000}
+      transitionInterpolator={new FlyToInterpolator()}
     >
 
       <Fragment>
@@ -51,19 +72,24 @@ function Map({city, onRoundFinish, currentScore}) {
         {city && <Fragment>
           <div className={s.cityTitleDiv}>{city.capitalCity}</div>
           <div className={s.scoreDiv}>Distance: {currentScore} km</div>
-          { successDistance !== 0 &&
+          {successDistance !== 0 &&
           <div className={s.successDiv}>
             <FontAwesomeIcon icon={faCheck}/>
-          </div> }
+          </div>}
         </Fragment>}
 
         <Fragment>
           {
             choiceMade &&
-            <Marker latitude={city.lat} longitude={city.long} offsetLeft={-10} offsetTop={-12}>
-              <div><FontAwesomeIcon
-                icon={faDotCircle}/></div>
-            </Marker>
+            <Fragment>
+              <Marker latitude={city.lat} longitude={city.long} offsetLeft={-10} offsetTop={-12}>
+                <div><FontAwesomeIcon
+                  icon={faDotCircle}/></div>
+              </Marker>
+
+
+            </Fragment>
+
           }
 
           {

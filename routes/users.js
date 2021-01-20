@@ -6,6 +6,7 @@ router.get('/',
 
   async (req,res) => {
     try {
+      // console.log('-------GET /')
       const users = await pool.query("SELECT user_name,top_score FROM users ORDER BY  top_score DESC LIMIT 5 ")
       res.json(users.rows)
     } catch (err) {
