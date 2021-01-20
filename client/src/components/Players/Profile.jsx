@@ -22,10 +22,10 @@ const Profile = ({isAuthenticated, fetchProfile, profile, games, getGames}) => {
 
   return isAuthenticated ? <div className={s.playersContainer}>
       <div className={s.profileContainer}>
-        <h1 className='py-5'>Greetings, {profile.user_name}! </h1>
-        <h2 className='py-1'>Your best score is <span className={s.scoreSpan}>{profile.top_score}</span>cities so far!
+        <h1>Greetings, {profile.user_name}! </h1>
+        <h2>Your best score is <span className={s.scoreSpan}>{profile.top_score}</span>cities so far!
         </h2>
-        <h3 className='py-1'>Do you want to improve it?</h3>
+        <h3>Do you want to improve it?</h3>
         <Link to='/game'>
           <button className={sBtn.button + ' btn btn-info my-3'}>New game</button>
         </Link>

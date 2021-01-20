@@ -21,7 +21,6 @@
     height: auto;
     background-color: white;
     border-radius: 2rem;
-    /*padding: 1rem 3rem;*/
     border: 2px solid #282c34;
 }
 
@@ -118,6 +117,7 @@
     .playersPanel {
         margin: 2rem 1rem;
         min-width: 95%;
+        width: 95%;
     }
     .playerContainer {
         padding: 2rem 5rem;
@@ -127,5 +127,22 @@
 @media screen and (max-width: 550px){
     .playerContainer {
         padding: 2rem 5rem;
+    }
+
+    .profileContainer {
+        padding: 1rem 2rem;
+    }
+
+    .playersPanel {
+        width: 95%;
+    }
+
+    .profileContainer h1 {
+        font-size: 1.5rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    .profileContainer h2, .profileContainer h3 {
+        font-size: 1rem;
     }
 }
